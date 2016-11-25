@@ -91,3 +91,6 @@ ENV/
 
 # pycharm
 .idea/
+
+# not uploading db
+db.sqlite3
