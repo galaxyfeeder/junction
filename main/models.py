@@ -43,5 +43,5 @@ class Bus(models.Model):
     latitude = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     load = models.PositiveIntegerField(default=0, blank=True, null=True)
-    line = models.ForeignKey(Line, null=True, blank=True)
+    line = models.ForeignKey(Line, null=True, blank=True, related_name='buses')
     last_stop = models.ForeignKey(Stop, blank=True, null=True)

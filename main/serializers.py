@@ -15,23 +15,38 @@ class StopSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Stop
-        fields = ('order', 'station')
-        read_only_fields = ('order', 'station')
+        fields = ('id', 'order', 'station')
+        read_only_fields = ('id', 'order', 'station')
+
+
+class SimpleLineSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Line
+        fields = ('number',)
+        read_only_fields = ('number',)
+
+
+class BusSerializer(serializers.HyperlinkedModelSerializer):
+    line = SimpleLineSerializer(read_only=True)
+
+    class Meta:
+        model = Bus
+        fields = ('code', 'max_capacity', 'latitude', 'longitude', 'load', 'line', 'last_stop_id')
+        read_only_fields = ('code', 'max_capacity', 'latitude', 'longitude', 'line')
+
+
+class SimpleBusSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Bus
+        fields = ('code', 'max_capacity', 'latitude', 'longitude', 'load', 'last_stop_id')
+        read_only_fields = ('code', 'max_capacity', 'latitude', 'longitude', 'load')
 
 
 class LineSerializer(serializers.HyperlinkedModelSerializer):
     stops = StopSerializer(many=True)
+    buses = SimpleBusSerializer(many=True)
 
     class Meta:
         model = Line
-        fields = ('number', 'stops')
-        read_only_fields = ('number', 'stops')
-
-
-class BusSerializer(serializers.HyperlinkedModelSerializer):
-    line = LineSerializer(read_only=True)
-
-    class Meta:
-        model = Bus
-        fields = ('code', 'max_capacity', 'latitude', 'longitude', 'load', 'line', 'last_stop')
-        read_only_fields = ('code', 'max_capacity', 'latitude', 'longitude', 'line')
+        fields = ('number', 'stops', 'buses')
+        read_only_fields = ('number', 'stops', 'buses')

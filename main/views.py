@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from django.views.generic import DetailView
 
-from main.models import Line, Station, Bus, Stop
-from main.serializers import BusSerializer, StationSerializer, StopSerializer, LineSerializer
+from main.models import Line, Station, Bus
+from main.serializers import BusSerializer, StationSerializer, LineSerializer
 
 
 class LineDetailView(DetailView):
