@@ -7,7 +7,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'junction',
         'USER': 'junction',
-        'PASSWORD': 'password',
+        'PASSWORD': 'junction',
         'HOST': 'localhost',
         'PORT': '',
     }
