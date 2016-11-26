@@ -25,7 +25,7 @@ SECRET_KEY = 'mfhgu4170yu(uvc#l+5fc!ltb!jw1r9230!^5=p(=qr&(*+yfp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -54,6 +54,10 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'junction.urls'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+ENV_PATH = os.path.abspath(os.path.dirname(__file__))
+MEDIA_ROOT = os.path.join(ENV_PATH, '../../static_server/media/')
+STATIC_ROOT = os.path.join(ENV_PATH, '../../static_server/static/')
+STATIC_URL = '/static/'
 
 TEMPLATES = [
     {
@@ -70,19 +74,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'junction.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Password validation
@@ -112,12 +103,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
-
-STATIC_URL = '/static/'
 
 # Django rest framework
 REST_FRAMEWORK = {
