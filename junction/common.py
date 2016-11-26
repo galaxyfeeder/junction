@@ -25,7 +25,7 @@ SECRET_KEY = 'mfhgu4170yu(uvc#l+5fc!ltb!jw1r9230!^5=p(=qr&(*+yfp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -70,19 +70,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'junction.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Password validation
