@@ -13,9 +13,15 @@ class Station(models.Model):
     class Meta:
         unique_together = (('latitude', 'longitude'),)
 
+    def __unicode__(self):
+        return self.code + ": " + self.name + "(" + str(self.latitude) + ", " + str(self.longitude) + ")"
+
 
 class Line(models.Model):
     number = models.CharField(max_length=10, unique=True)
+
+    def __unicode__(self):
+        return "Line " + self.number
 
 
 class Stop(models.Model):
@@ -25,6 +31,10 @@ class Stop(models.Model):
 
     class Meta:
         unique_together = (('line', 'station'), ('line', 'order'))
+        ordering = ('order',)
+
+    def __unicode__(self):
+        return self.line.number + " " + str(self.order) + ": " + self.station.name
 
 
 class Bus(models.Model):
