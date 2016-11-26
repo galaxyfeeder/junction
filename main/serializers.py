@@ -48,5 +48,5 @@ class LineSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Line
-        fields = ('number', 'stops', 'buses')
-        read_only_fields = ('number', 'stops', 'buses')
+        fields = ('number', 'stops', 'buses', 'id')
+        read_only_fields = ('number', 'stops', 'buses', 'id')
