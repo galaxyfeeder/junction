@@ -6,7 +6,7 @@ from main.models import Bus, Station, Stop, Line
 class StationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Station
-        fields = ('name', 'code', 'latitude', 'longitude', 'people_waiting')
+        fields = ('name', 'code', 'latitude', 'longitude')
         read_only_fields = ('name', 'code', 'latitude', 'longitude')
 
 
@@ -15,7 +15,7 @@ class StopSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Stop
-        fields = ('id', 'order', 'station')
+        fields = ('id', 'order', 'station', 'people_waiting')
         read_only_fields = ('id', 'order', 'station')
 
 

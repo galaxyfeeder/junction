@@ -8,7 +8,6 @@ class Station(models.Model):
     code = models.CharField(max_length=10, unique=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=8)
     longitude = models.DecimalField(max_digits=10, decimal_places=8)
-    people_waiting = models.PositiveIntegerField(default=0)
 
     class Meta:
         unique_together = (('latitude', 'longitude'),)
@@ -28,6 +27,7 @@ class Stop(models.Model):
     order = models.PositiveIntegerField()
     station = models.ForeignKey(Station)
     line = models.ForeignKey(Line, related_name='stops')
+    people_waiting = models.PositiveIntegerField(default=0)
 
     class Meta:
         unique_together = (('line', 'station'), ('line', 'order'))
