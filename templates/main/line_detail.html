@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/linemap.css">
+</head>
+<body>
+    <div id="map-wrapper">
+
+        <div class="line horizontal-bottom" style="width: calc((({{ line.stop_set.count }} - 1) * 50px) + 14px)">
+            {% for station in line.stop_set.all %}
+
+            <span class="station premium" id="test" style="left: calc({{ forloop.counter0 }} * 50px)"><span class="label station-label left-label"><i class="tram"></i><i class="bus"></i><i class="vline"></i>{{ station.station.name }}</span></span>
+                    {% if forloop.first or forloop.last %}
+                <span class="line-terminus vertical" style="left: calc(({{ forloop.counter0 }} * 50px) - 7px)"></span>
+                    {% endif %}
+
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
