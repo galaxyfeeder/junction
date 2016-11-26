@@ -17,35 +17,40 @@
         <div class="row">
             <div class="col-xs-10">
                 <h1>HELSINKI <small>{{ station.name }}</small></h1>
-                <img id="logo" src="/static/img/logo.png" height="25">
+                <img id="logo" src="/static/img/logo.png" height="50">
             </div>
         </div>
-        <hr>
-        <div class="row count2">
+        <div class="hr"></div>
+        <div class="row">
             {% for stop in station.stop_set.all %}
             <div class="row bus-entry">
                 <div class="col-xs-2">
-                    <span class="line-number">{{ stop.line.number }}</span>
+                    <div class="line-number-container">
+                        <span class="line-number">{{ stop.line.number }}</span>
+                    </div>
                 </div>
-                <div class="col-xs-7">
-                    <span class="destination">{{ stop.line.stop_set.last.station.name }}</span>
-                </div>
-                <div class="col-xs-3">
-                    <span class="time-left">2 min</span>
-                </div>
-                <div class="col-xs-12">
-                    <div id="map-wrapper">
+                <div class="col-xs-10" style="margin-top: -10px;">
+                    <div class="col-xs-9">
+                        <span class="destination">{{ stop.line.stops.last.station.name }}</span>
+                    </div>
+                    <div class="col-xs-3 align-right">
+                        <span class="time-left">2 min</span>
+                    </div>
+                    <div class="col-xs-12">
+                        <div id="map-wrapper">
 
-                        <div class="line blue horizontal-bottom next-stops" style="width: calc((({{ stop.line.stop_set.count }} - 1) * 50px) + 14px)">
-                        <!--<span class="bus" id="test" style="left: 75px"></span>-->
-                            {% for station in stop.line.stop_set.all %}
+                            <div class="line white horizontal-bottom full-line" style="width: 100%">
+                            <!--<span class="bus" id="test" style="left: 75px"></span>-->
+                                {% for station_l in stop.line.stops.all %}
 
-                            <span class="station {% if forloop.first or forloop.last %}premium{% elif forloop.counter == 3 %}host{% endif %}" id="test" style="left: calc({{ forloop.counter0 }} * 50px)"><span class="label station-label left-label"><i class="count">2</i><i class="stop"></i>{{ station.station.name }}</span></span>
-                                    {% if forloop.last %}
-                                <span class="line-terminus vertical" style="left: calc(({{ forloop.counter0 }} * 50px) - 7px)"></span>
-                                    {% endif %}
+                                <span class="station {% if forloop.last or forloop.first %}premium{% elif station_l.station == station %}current{% elif forloop.counter == 3 %}host{% endif %}" id="test" style="left: calc(({{ forloop.counter0 }} * (100% / ({{ stop.line.stops.count }} - 1))) - 7px)">
+                                </span>
+                                        {% if station_l.station == station %}
+                                    <span class="current-marker" style="left: calc(({{ forloop.counter0 }} * (100% / ({{ stop.line.stops.count }} - 1))) - 14px)"></span>
+                                        {% endif %}
 
-                            {% endfor %}
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -53,9 +58,292 @@
             {% endfor %}
         </div>
         <img class="divider" src="/static/img/divider.svg">
-        <div class="row count2">
-
+        <div class="row">
+            <div id="map" class="busses-{{ station.stop_set.count }}"></div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+
+	var map;
+
+	var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	var directionsService;
+
+	var currentStation = null;
+	var currentBus = null;
+
+	var stationMarkers = [];
+	var busMarkers = [];
+	var routeDirections = [];
+	var completeRoute = [];
+
+	function initMap() {
+		directionsService = new google.maps.DirectionsService();
+
+		var helsinki = {lat: 60.167469, lng: 24.961435}; //lat: 60.167469, lng: 24.961435
+		map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 13,
+			center: helsinki
+		});
+
+		//parseLines(lines);
+		$.get( "http://junction.westeurope.cloudapp.azure.com/api/line/?format=json", function( data ) {
+			//$( ".result" ).html( data );
+			//alert( "Load was performed." );
+			console.log(data);
+			parseLines(data);
+		});
+	}
+
+	function print() {
+		var seconds = 0;
+		for(i=0;i<routeDirections.length;i++) {
+			console.log(i);
+			var k = routeDirections[i];
+			var routes = k.directions.routes;
+			for (j=0;j<routes.length;j++) {
+				var route = routes[j];
+				var legs = route.legs;
+				for(k=0;k<legs.length;k++) {
+					var leg = legs[k];
+					seconds += leg.duration.value;
+				}
+			}
+		}
+		return seconds;
+	}
+
+	function clearStations() {
+		for(i=0;i<stationMarkers.length;i++) {
+			stationMarkers[i].setMap(null);
+		}
+		stationMarkers = [];
+	}
+	function clearDirections() {
+		for(i=0;i<routeDirections.length;i++) {
+			routeDirections[i].setMap(null);
+		}
+		routeDirections = [];
+	}
+	function clearBuses() {
+		for(i=0;i<busMarkers.length;i++) {
+			busMarkers[i].setMap(null);
+		}
+		busMarkers = [];
+	}
+	function clearAll() {
+		clearStations();
+		clearDirections();
+		hideCompleteRoute();
+		clearBuses();
+	}
+
+	function parseBuses(text) {
+		info = JSON.parse(text);
+		addBuses(info);
+	}
+
+	function hideCompleteRoute() {
+		for(i=0;i<completeRoute.length;i++) {
+			completeRoute[i].setMap(null);
+		}
+		completeRoute = [];
+	}
+	function showCompleteRoute() {
+		hideCompleteRoute();
+		addDirections(true);
+	}
+
+	function addBuses(buses) {
+		for(i=0;i<buses.length;i++) {
+			var image = {
+				url:'http://www.theedgeproperty.com.sg/sites/all/modules/analytic/images/icons/bus.png',
+				//url:'http://www.nyfalls.com/assets/maps/icons/transportation-blue/busstop.png'
+				//size: new google.maps.Size(100, 100),
+			};
+
+			var marker = new google.maps.Marker({
+				position: {lat: buses[i].latitude, lng: buses[i].longitude},
+				//label: labels[i % labels.length],
+				map: map,
+				icon: image,
+				load: buses[i].load,
+				code: buses[i].code,
+				max: buses[i].max_capacity,
+				myid: buses[i].id,
+			});
+			google.maps.event.addListener(marker, "click", function(event) { 				// ?????????????????
+				showBusControls(this.myid);
+				//showStationControls(this.myid);
+			});
+			busMarkers.push(marker);
+		}
+	}
+	function parseText(text) {
+		clearAll();
+		//info = JSON.parse(text);
+
+		//addStations(info.stations);
+		addStations(text);
+
+		addDirections(true);
+		addDirections(false);
+	}
+	function addStations(stations) {
+		var bounds = new google.maps.LatLngBounds();
+		for(i=0;i<stations.length;i++) {
+			console.log(stations[i]);
+
+			var image = {
+				//url:'http://www.theedgeproperty.com.sg/sites/all/modules/analytic/images/icons/bus.png',
+				url:'http://www.nyfalls.com/assets/maps/icons/transportation-blue/busstop.png'
+				//size: new google.maps.Size(100, 100),
+			};
+
+			var marker = new google.maps.Marker({
+				position: {lat: stations[i].station.latitude, lng: stations[i].station.longitude},
+				//label: labels[i % labels.length],
+				map: map,
+				icon: image,
+				myid: i,
+				goto: 1
+			});
+			bounds.extend(marker.position);
+			google.maps.event.addListener(marker, "click", function(event) { 				//console.log(stations.stations[i].id);
+				//console.log(this.position.lat() + " - " + this.position.lng()); 				//console.log(this.myid);
+				showStationControls(this.myid);
+			});
+
+			stationMarkers.push(marker);
+		}
+		map.fitBounds(bounds);
+	}
+	function showStationControls(id) {
+		$(".item-title").text("Station "+id);
+		$(".bus-control").hide();
+		$(".station-control").show();
+		currentBus = null;
+		currentStation = id;
+	}
+	function showBusControls(id) {
+		$(".item-title").text("Bus " + id);
+		$(".bus-control").show();
+		$(".station-control").hide();
+		currentStation = null;
+		currentBus = id;
+	}
+
+	function addDirections(all) {
+		var tmpStations = [];
+		for(i=0; i<stationMarkers.length; i++) {
+			var sm = stationMarkers[i];
+			if(sm.myid != 1 || all) {
+				tmpStations.push(sm);
+			}
+		}
+
+		for(i=0; i<tmpStations.length - 1 ; i++) {
+			var sm = tmpStations[i];
+			var next = tmpStations[i+1];
+			var travelMode = google.maps.DirectionsTravelMode.DRIVING;
+			var request = {
+				origin: sm.position,
+				destination: next.position,
+				travelMode: travelMode
+		    };
+		    var rendererOptions = {
+		        map: map,
+		        suppressMarkers : true,
+		        preserveViewport: true
+		    }
+		    if(all) {
+		    	rendererOptions.polylineOptions = {strokeColor: "#111", strokeOpacity: 0.3, strokeWeight:5};
+		    }
+		    directionsService.route(request, function(response, status) {
+		    	disp = new google.maps.DirectionsRenderer(rendererOptions);
+	            disp.setMap(map);
+	            disp.setDirections(response);
+	            if (all) {
+	            	completeRoute.push(disp);
+	            }else {
+	            	routeDirections.push(disp);
+	            }
+		    });
+		}
+	}
+
+	function parseLines(text) {
+		//var tmp = JSON.parse(text);
+		var tmp = text;
+		for(i=0;i<tmp.length;i++) {
+			var line = tmp[i];
+			$(".lines").append("<li><a class='line' href='javascript:void(0)' data-id='" + line.id + "' data-linenumber='" + line.number + "' >" + line.number + "</a></li>");
+		}
+
+		$(".line").on("click", function() {
+			$(".line-title").text($(this).data('linenumber') + " line");
+			$(".line-control").show();
+
+			$.get( "http://junction.westeurope.cloudapp.azure.com/api/line/" + $(this).data("id") + "/?format=json", function( data ) {
+
+				//parseLines(data);
+				addBuses(data.buses);
+				parseText(data.stops);
+			});
+
+			//alert($(this).data("linenumber"));
+			parseText(stationsText);
+			//parseBuses(buss);
+		});
+	}
+
+	function getBusById(id) {
+		//return busMarkers[0];
+		for (i=0; i<busMarkers.length; i++) {
+			if(busMarkers[i].myid == id) return busMarkers[i];
+		}
+		return;
+	}
+	function getStationById(id) {
+		//return busMarkers[0];
+		for (i=0; i<stationMarkers.length; i++) {
+			if(stationMarkers[i].myid == id) return stationMarkers[i];
+		}
+		return;
+	}
+
+	// ---------------------------------------------------
+
+	var stationsText = '{ "stations" : [' +
+	'{ "name":"Solvik" , "lat":60.1680265 , "lng":24.9375109, "id":1 },' + //60.1680265,24.9375109 //ORIGINAL-60.201517-24.375928
+	'{ "name":"Louhosmäki" , "lat":60.165650 , "lng":24.936524, "id":2 },' + //60.165650, 24.936524 //ORIGINAL-60.202282-24.358088
+	'{ "name":"Evitskog" , "lat":60.1649276 , "lng":24.9288585, "id":3},' + //60.1649276,24.9288585 //ORIGINAL-60.20141-24.342
+	'{ "name":"", "lat":60.1619962, "lng":24.9289412, "id":4}]}';
+
+	var lines = '[{"name":"Lijn 14"},{"name":"Lijn 17"}]';
+
+	var buss = '[{"id":10,"lat":60.168067,"lng":24.934156},{"id":20,"lat":60.165238,"lng":24.929650},{"id":30,"lat":60.163039,"lng":24.928191}]';
+
+
+	$(".line-control").hide();
+	$(".station-control").hide();
+	$(".bus-control").hide();
+	$("#btn-show-complete").hide();
+
+
+	$("#btn-show-complete").on("click", function() {
+		showCompleteRoute();
+		$("#btn-show-complete").hide();
+		$("#btn-hide-complete").show();
+	});
+	$("#btn-hide-complete").on("click", function() {
+		hideCompleteRoute();
+		$("#btn-show-complete").show();
+		$("#btn-hide-complete").hide();
+	});
+
+</script>
+<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUhVDH00C242tqOr9-NI2jIyQEqcl4ZWo&callback=initMap"></script>
 </body>
 </html>
