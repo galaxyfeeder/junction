@@ -12,18 +12,12 @@ html,
 #map-wrapper {
     margin: 0;
     padding: 20px 50px;
-    width: 100%;
-    height: 100%;
     font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	-webkit-transform: translateZ(0);
 	transform: translateZ(0);
 }
 
-#map-wrapper {
-	width: 1670px;
-    height: 1460px;
-}
 i {
 	margin-left: 1px;
 	margin-right: 1px;
@@ -55,6 +49,20 @@ i:last-child {
 	top: -2px;
 }
 
+.bus-label {
+	float: left;
+	width: 200px;
+	text-align: center;
+}
+
+.bus-label span {
+	display: inline-block;
+	float:left;
+	padding-right: 5px;
+	position:relative;
+	top: -2px;
+}
+
 
 span.left-label {
 	text-align:right;
@@ -68,37 +76,16 @@ span.right-label {
 	transform: translate(25px,0px);
 }
 
-i.tram {
-	width: 10px;
-	height: 10px;
-	background: #71bf44;
-}
-i.bus {
+i.stop {
 	border-top: 0px solid transparent;
 	border-bottom: 10px solid #f7941e;
 	border-left: 6px solid transparent;
 	border-right: 6px solid transparent;
 }
-i.vline {
-	background: #804098;
-	-webkit-border-radius: 50%;
-	border-radius: 50%;
-	border-radius: 50%;
-	width: 10px;
-	height: 10px;
-}
-i.coach {
-	background: #804098;
-	width: 7px;
-	height: 7px;
-	-webkit-transform: rotate(45deg) translate(0px,-2px);
-	transform: rotate(45deg) translate(0px,-2px);
-}
-i.parking {
+i.count {
 	color: #77787b;
 	font-weight: bold;
-	font-family:Arial Black, arial, sans-serif;
-	width: 9px;
+	font-family:Arial, arial, sans-serif;
 	height: 12px;
 	text-indent: 0;
 	-webkit-transform: translate(0px,-1px);
@@ -141,6 +128,18 @@ i.parking {
 	border: 2px solid #000;
 	width: 10px;
 	height: 10px;
+}
+
+.bus {
+	display: block;
+	position: absolute;
+	top: -7px;
+	width: 10px;
+	height: 7px;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	background: #78909C;
+	margin-left:3px;
 }
 
 #southerncross {
@@ -210,14 +209,27 @@ i.parking {
 }
 
 .line {
-	background: #ffcb08;
+	background: #FFEB3B;
 	width: 200px;
 	height: 14px;
 	position: relative;
 	z-index: -2;
+	margin: auto;
 }
-.line.zone2 {
+.line.blue {
 	background: #16c0e9;
+}
+
+.line.red {
+	background: #F44336;
+}
+
+.line.green {
+	background: #4CAF50;
+}
+
+.line.orange {
+	background: #FF9800;
 }
 
 
@@ -226,14 +238,30 @@ i.parking {
 	height: 14px;
 	-webkit-border-radius: 14px;
 	border-radius: 14px;
-	background: #ffcb08;
-	border: 1px solid #FFF;
+	background: #FFEB3B;
+	/*border: 1px solid #FFF;*/
 	position: absolute;
 	left: -7px;
 	z-index:-1;
 }
 .line-terminus.zone2 {
 	background: #16c0e9;
+}
+
+.line.blue .line-terminus {
+	background: #16c0e9;
+}
+
+.line.red .line-terminus {
+	background: #F44336;
+}
+
+.line.green .line-terminus {
+	background: #4CAF50;
+}
+
+.line.orange .line-terminus {
+	background: #FF9800;
 }
 
 .line-terminus.vertical {
