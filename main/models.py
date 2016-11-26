@@ -27,7 +27,7 @@ class Line(models.Model):
 class Stop(models.Model):
     order = models.PositiveIntegerField()
     station = models.ForeignKey(Station)
-    line = models.ForeignKey(Line)
+    line = models.ForeignKey(Line, related_name='stops')
 
     class Meta:
         unique_together = (('line', 'station'), ('line', 'order'))
