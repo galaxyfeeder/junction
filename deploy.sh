@@ -30,7 +30,5 @@ else
     pkill gunicorn
     $ENV_DIR/bin/gunicorn -c $SETTINGS_DIR/gunicorn.py junction.wsgi_production &
 
-    crontab -u root $SETTINGS_DIR/cron/production.cron
-
     cd $USER_DIR
 fi
