@@ -8,10 +8,11 @@
 <body>
     <div id="map-wrapper">
 
-        <div class="line horizontal-bottom" style="width: calc((({{ line.stop_set.count }} - 1) * 50px) + 14px)">
+        <div class="line blue horizontal-bottom" style="width: calc((({{ line.stop_set.count }} - 1) * 50px) + 14px)">
+        <!--<span class="bus" id="test" style="left: 75px"></span>-->
             {% for station in line.stop_set.all %}
 
-            <span class="station premium" id="test" style="left: calc({{ forloop.counter0 }} * 50px)"><span class="label station-label left-label"><i class="tram"></i><i class="bus"></i><i class="vline"></i>{{ station.station.name }}</span></span>
+            <span class="station {% if forloop.first or forloop.last %}premium{% elif forloop.counter == 3 %}host{% endif %}" id="test" style="left: calc({{ forloop.counter0 }} * 50px)"><span class="label station-label left-label"><i class="count">2</i><i class="stop"></i>{{ station.station.name }}</span></span>
                     {% if forloop.first or forloop.last %}
                 <span class="line-terminus vertical" style="left: calc(({{ forloop.counter0 }} * 50px) - 7px)"></span>
                     {% endif %}
