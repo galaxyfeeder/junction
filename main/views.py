@@ -1,7 +1,13 @@
 from rest_framework import viewsets
+from django.shortcuts import render
+from django.views.generic import DetailView
 
-from main.models import Station, Bus
-from main.serializers import StationSerializer, BusSerializer
+from main.models import Line
+
+
+class LineDetailView(DetailView):
+    model = Line
+
 
 
 class StationViewSet(viewsets.ModelViewSet):
