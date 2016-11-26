@@ -15,3 +15,4 @@ class BusSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Bus
+        fields = ('', '', '', '', '')

@@ -28,6 +28,7 @@ class Stop(models.Model):
 
 
 class Bus(models.Model):
+    code = models.CharField(max_length=10)
     max_capacity = models.PositiveIntegerField()
     latitude = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
