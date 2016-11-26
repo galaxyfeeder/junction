@@ -5,7 +5,7 @@ from django.db import models
 
 class Station(models.Model):
     name = models.CharField(max_length=100)
-    code = models.CharField(max_length=10)
+    code = models.CharField(max_length=10, unique=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=5)
     longitude = models.DecimalField(max_digits=10, decimal_places=5)
     people_waiting = models.PositiveIntegerField(default=0)
@@ -38,7 +38,7 @@ class Stop(models.Model):
 
 
 class Bus(models.Model):
-    code = models.CharField(max_length=10)
+    code = models.CharField(max_length=10, unique=True)
     max_capacity = models.PositiveIntegerField()
     latitude = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
