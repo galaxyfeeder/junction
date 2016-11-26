@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Static Display</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/linemap.css">
+    <link rel="stylesheet" href="/static/css/extra.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-image">
+        <div class="layer"></div>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-xs-10">
+                <h1>HELSINKI <small>{{ station.name }}</small></h1>
+                <img id="logo" src="/static/img/logo.png" height="25">
+            </div>
+        </div>
+        <hr>
+        <div class="row count2">
+            {% for stop in station.stop_set.all %}
+            <div class="row bus-entry">
+                <div class="col-xs-2">
+                    <span class="line-number">{{ stop.line.number }}</span>
+                </div>
+                <div class="col-xs-7">
+                    <span class="destination">{{ stop.line.stop_set.last.station.name }}</span>
+                </div>
+                <div class="col-xs-3">
+                    <span class="time-left">2 min</span>
+                </div>
+                <div class="col-xs-12">
+                    <div id="map-wrapper">
+
+                        <div class="line blue horizontal-bottom next-stops" style="width: calc((({{ stop.line.stop_set.count }} - 1) * 50px) + 14px)">
+                        <!--<span class="bus" id="test" style="left: 75px"></span>-->
+                            {% for station in stop.line.stop_set.all %}
+
+                            <span class="station {% if forloop.first or forloop.last %}premium{% elif forloop.counter == 3 %}host{% endif %}" id="test" style="left: calc({{ forloop.counter0 }} * 50px)"><span class="label station-label left-label"><i class="count">2</i><i class="stop"></i>{{ station.station.name }}</span></span>
+                                    {% if forloop.last %}
+                                <span class="line-terminus vertical" style="left: calc(({{ forloop.counter0 }} * 50px) - 7px)"></span>
+                                    {% endif %}
+
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <img class="divider" src="/static/img/divider.svg">
+        <div class="row count2">
+
+        </div>
+    </div>
+</body>
+</html>

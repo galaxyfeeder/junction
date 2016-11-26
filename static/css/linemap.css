@@ -7,8 +7,6 @@
     box-sizing: border-box;
 }
 
-body,
-html,
 #map-wrapper {
     margin: 0;
     padding: 20px 50px;
@@ -2409,6 +2407,2463 @@ right: 43px;
 #legend .premium {
 	position: relative;
 	top: -1px;
+}
+
+#map-wrapper {
+    margin: 0;
+    padding: 20px 50px;
+    font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+i {
+	margin-left: 1px;
+	margin-right: 1px;
+	display: inline-block;
+	font-style:normal;
+}
+i:first-child {
+	margin-left: 3px;
+}
+i:last-child {
+	margin-right: 3px;
+}
+.label {
+    /visibility: hidden;
+	font-size: 12px;
+	line-height:1;
+	text-align: left;
+}
+.station-label {
+	float: left;
+	width: 200px;
+
+}
+.station-label span {
+	display: inline-block;
+	float:left;
+	padding-right: 5px;
+	position:relative;
+	top: -2px;
+}
+
+.bus-label {
+	float: left;
+	width: 200px;
+	text-align: center;
+}
+
+.bus-label span {
+	display: inline-block;
+	float:left;
+	padding-right: 5px;
+	position:relative;
+	top: -2px;
+}
+
+
+span.left-label {
+	text-align:right;
+	-webkit-transform: translate(-210px,20px);
+	transform: translate(-210px,20px);
+}
+
+span.right-label {
+	text-align:left;
+	-webkit-transform: translate(25px,0px);
+	transform: translate(25px,0px);
+}
+
+i.stop {
+	border-top: 0px solid transparent;
+	border-bottom: 10px solid #f7941e;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+}
+i.count {
+	color: #77787b;
+	font-weight: bold;
+	font-family:Arial, arial, sans-serif;
+	height: 12px;
+	text-indent: 0;
+	-webkit-transform: translate(0px,-1px);
+	transform: translate(0px,-1px);
+}
+
+.line-label {
+    font-weight: bold;
+	float: left;
+
+}
+.station {
+	display: block;
+	position: absolute;
+	top: 3px;
+	width: 8px;
+	height: 8px;
+	background: #FFF;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	margin-left:3px;
+}
+
+.line.horizontal-bottom .station {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.station.premium {
+	top: 0;
+	background: #000;
+	border: 1px solid #FFF;
+	width: 14px;
+	height: 14px;
+	margin-left:0px;
+}
+.station.host {
+	margin-left:2px;
+	background: #FFF;
+	border: 2px solid #000;
+	width: 10px;
+	height: 10px;
+}
+
+.bus {
+	display: block;
+	position: absolute;
+	top: -7px;
+	width: 10px;
+	height: 7px;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	background: #78909C;
+	margin-left:3px;
+}
+
+#southerncross {
+	top: 30px;
+	left: -14px;
+}
+#southerncross > .label {
+	text-align: right;
+	width: 55px;
+	-webkit-transform: translate(-60px,0px);
+	transform: translate(-60px,0px);
+}
+#flinders {
+	top: 72px;
+	left: 130px;
+}
+#flinders > .label {
+	-webkit-transform: translate(-56px,15px);
+	transform: translate(-56px,15px);
+}
+#parliament {
+	top: 10px;
+	left: 162px;
+}
+#parliament > .label {
+	-webkit-transform: translate(17px,0px);
+	transform: translate(17px,0px);
+}
+#melbcentral {
+	top: -14px;
+	left: 134px;
+}
+#melbcentral > .label {
+	-webkit-transform: translate(-25px,-25px);
+	transform: translate(-25px,-25px);
+	width: 80px;
+}
+#flagstaff {
+	top: -14px;
+	left: 26px;
+}
+#flagstaff > .label {
+	-webkit-transform: translate(-25px,-15px);
+	transform: translate(-25px,-15px);
+}
+.cbd {
+    position: absolute;
+    top: 580px;
+    left: 550px;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    border: 14px solid #ffcb08;
+    width: 190px;
+    height: 100px;
+    -webkit-border-top-right-radius: 20px;
+    -webkit-border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.cbd-label {
+	width: 100%;
+	font-size: 14px;
+    text-align: center;
+}
+
+.line {
+	background: #FFEB3B;
+	width: 200px;
+	height: 14px;
+	position: relative;
+	z-index: -2;
+	margin: auto;
+}
+.line.blue {
+	background: #16c0e9;
+}
+
+.line.red {
+	background: #F44336;
+}
+
+.line.green {
+	background: #4CAF50;
+}
+
+.line.orange {
+	background: #FF9800;
+}
+
+
+.line-terminus {
+	width: 28px;
+	height: 14px;
+	-webkit-border-radius: 14px;
+	border-radius: 14px;
+	background: #FFEB3B;
+	/*border: 1px solid #FFF;*/
+	position: absolute;
+	left: -7px;
+	z-index:-1;
+}
+.line-terminus.zone2 {
+	background: #16c0e9;
+}
+
+.line.blue .line-terminus {
+	background: #16c0e9;
+}
+
+.line.red .line-terminus {
+	background: #F44336;
+}
+
+.line.green .line-terminus {
+	background: #4CAF50;
+}
+
+.line.orange .line-terminus {
+	background: #FF9800;
+}
+
+.line-terminus.vertical {
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.line.next-stops:after {
+content: "";
+    position: absolute;
+    top: -2px;
+    left: 0;
+    background-color: #16c0e9;
+    width: 3px;
+    height: 18px;
+}
+
+.multizone:before {
+	content:"";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	background: #ffcb08;
+	border-top: 1px solid #FFF;
+	border-right: 1px solid #FFF;
+
+}
+.multizone:after {
+	content:"";
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50%;
+	height: 100%;
+	background: #16c0e9;
+	border-bottom: 1px solid #FFF;
+	border-left: 1px solid #FFF;
+}
+
+.line-continue {
+	position:absolute;
+	border-top: 0px solid transparent;
+	border-bottom: 7px solid #16c0e9;
+	border-left: 8px solid transparent;
+	border-right: 7px solid transparent;
+}
+
+.corner-br {
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	position: absolute;
+	bottom: -39px;
+	left: -8px;
+
+}
+.corner-br:before {
+	content: "";
+	width: 42px;
+	height: 45px;
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	border: 14px solid #ffcb08;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+}
+
+/* ------------------------------craigieburn ---------------*/
+
+
+.craigieburn {
+	width: 14px;
+	height: 530px;
+	-webkit-transform: translate(-1px,-100%);
+	transform: translate(-1px,-100%);
+}
+.craigieburn:after {
+	content:"";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 140px;
+	background: #16c0e9;
+	z-index:-1;
+}
+
+.craigieburn > .station {
+	top: auto;
+	left: 0px;
+}
+.showgrounds {
+	width: 130px;
+	height: 14px;
+	position: absolute;
+	bottom: 180px;
+	left: -129px;
+
+}
+
+.craigieburn > .station .label {
+	text-align:right;
+	-webkit-transform: translate(-209px,0px);
+	transform: translate(-209px,0px);
+}
+
+#showgrounds > .label,
+#racecourse > .label {
+	-webkit-transform: translate(-90px,-3px) rotate(45deg) ;
+	transform: translate(-90px,-3px) rotate(45deg) ;
+}
+
+#racecourse > .label {
+	font-weight: bold;
+	width: 100px;
+	-webkit-transform: translate(-85px,-35px) rotate(45deg);
+	transform: translate(-85px,-35px) rotate(45deg);
+}
+#showgrounds {
+	top: 3px;
+	left: 25px;
+}
+#racecourse {
+	top: 3px;
+	left: 0px;
+	z-index:2;
+}
+
+
+#northmelb {
+	bottom: 100px;
+	z-index:2;
+}
+#northmelb > .label {
+	text-align: left;
+	-webkit-transform: translate(16px,16px);
+	transform: translate(16px,16px);
+}
+
+
+#kensington {
+	bottom: 132px;
+}
+#kensington > .label {
+	width: 85px;
+	-webkit-transform: translate(-95px,0px);
+	transform: translate(-95px,0px);
+}
+
+#newmarket {
+	bottom: 160px;
+}
+#newmarket > .label {
+	width: 85px;
+	-webkit-transform: translate(-95px,0px);
+	transform: translate(-95px,0px);
+}
+
+#ascotvale {
+	bottom: 205px;
+}
+
+#mooneeponds {
+	bottom: 235px;
+}
+
+#essendon {
+	bottom: 260px;
+}
+
+#glenbervie {
+	bottom: 290px;
+}
+
+#strathmore {
+	bottom: 315px;
+}
+
+.craigieburn .multizone {
+	position: absolute;
+	width: 14px;
+	height: 55px;
+	background: #FFF;
+	bottom: 343px;
+	left: 0;
+}
+#pascoevale {
+	bottom: 340px;
+}
+
+#oakpark {
+	bottom: 366px;
+}
+
+#glenroy {
+	bottom: 390px;
+}
+
+#jacana {
+	bottom: 418px;
+}
+
+#broadmeadows {
+	bottom: 440px;
+}
+
+#coolaroo {
+	bottom: 468px;
+}
+
+#roxburgh {
+	bottom: 493px;
+}
+
+#craigieburn {
+	bottom: 515px;
+	z-index:2;
+}
+#craigieburn > .label {
+	font-weight: bold;
+	text-align:right;
+	-webkit-transform: translate(-210px,0px);
+	transform: translate(-210px,0px);
+}
+
+.craigieburn .line-continue {
+	left: 0;
+	bottom: 531px;
+	z-index:1;
+}
+
+/* ------------------------------upfield ---------------*/
+
+
+.upfield {
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 335px;
+	-webkit-transform: translate(65px,70px);
+	transform: translate(65px,70px);
+	z-index:1;
+}
+.upfield:before {
+	content: "";
+	position:absolute;
+	bottom: -24px;
+	left: -57px;
+	width: 51px;
+	height: 14px;
+	background: #ffcb08;
+}
+
+.upfield:after {
+	content:"";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 100px;
+	background: #16c0e9;
+	z-index:-1;
+}
+
+.upfield .multizone {
+	position: absolute;
+	width: 14px;
+	height: 55px;
+	background: #FFF;
+	bottom: 216px;
+	left: 0;
+}
+
+.upfield .label {
+	-webkit-transform: translate(14px,0px);
+	transform: translate(14px,0px);
+}
+.upfield .station {
+	top: auto;
+	left: 0px;
+}
+
+#macaulay {
+	bottom: 10px;
+}
+
+#flemingtonbridge {
+	bottom: 35px;
+}
+#flemingtonbridge > .label {
+	width: 100px;
+	line-height:1.1;
+	-webkit-transform: translate(14px,-8px);
+	transform: translate(14px,-8px);
+}
+
+#royalpark {
+	bottom: 60px;
+}
+
+#jewell {
+	bottom: 85px;
+}
+
+#brunswick {
+	bottom: 110px;
+}
+
+#anstey {
+	bottom: 135px;
+}
+
+#moreland {
+	bottom: 160px;
+}
+
+#coburg {
+	bottom: 185px;
+}
+
+#batman {
+	bottom: 213px;
+}
+
+#merlyntson {
+	bottom: 238px;
+}
+
+#fawkner {
+	bottom: 266px;
+}
+
+#gowrie {
+	bottom: 294px;
+}
+
+#upfield {
+	bottom: 320px;
+	z-index:2;
+}
+
+#upfield > .label {
+	font-weight: bold;
+	-webkit-transform: translate(23px,0px);
+	transform: translate(23px,0px);
+}
+
+
+/* ------------------ epping ---------------- */
+
+
+.epping {
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 544px;
+	-webkit-transform: translate(293px,-552px);
+	transform: translate(293px,-552px);
+	z-index:1;
+}
+.epping:before {
+	content: "";
+	position:absolute;
+	bottom: -24px;
+	left: -107px;
+	width: 101px;
+	height: 14px;
+	background: #ffcb08;
+}
+
+.epping:after {
+	content:"";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 150px;
+	background: #16c0e9;
+	z-index:-1;
+}
+
+.epping .multizone {
+	position: absolute;
+	width: 14px;
+	height: 55px;
+	background: #FFF;
+	bottom: 330px;
+	left: 0;
+}
+
+.epping .label:not(.left-label) {
+	-webkit-transform: translate(14px,0px);
+	transform: translate(14px,0px);
+}
+.epping .station {
+	top: auto;
+	left: 0px;
+}
+#jolimont {
+	bottom: -22px;
+	left: -55px;
+}
+#jolimont > .label {
+	-webkit-transform: translate(-22px,12px);
+	transform: translate(-22px,12px);
+}
+#westrich {
+	bottom: 40px;
+}
+#northrich {
+	bottom: 65px;
+}
+#collingwood {
+	bottom: 90px;
+}
+#victoriapark {
+	bottom: 115px;
+}
+#cliftonhill {
+	bottom: 138px;
+}
+#rushall {
+	bottom: 167px;
+}
+#merri {
+	bottom: 192px;
+}
+#northcote {
+	bottom: 215px;
+}
+#croxton {
+	bottom: 246px;
+}
+#thornbury {
+	bottom: 271px;
+}
+#bell {
+	bottom: 296px;
+}
+#preston {
+	bottom: 325px;
+}
+#regent {
+	bottom: 354px;
+}
+#reservoir {
+	bottom: 375px;
+}
+#ruthven {
+	bottom: 405px;
+}
+#keonpark {
+	bottom: 430px;
+}
+#thomastown {
+	bottom: 454px;
+}
+#lalor {
+	bottom: 484px;
+}
+#epping {
+	bottom: 506px;
+}
+#southmorang {
+	bottom: 530px;
+	z-index:2;
+}
+#southmorang > .label {
+	-webkit-transform: translate(-212px,0px);
+	transform: translate(-212px,0px);
+	font-weight: bold;
+}
+
+/* ------------------ hurstbridge ---------------- */
+
+
+.hurstbridge {
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 491px;
+	-webkit-transform: rotate(45deg) translate(111px,-132px);
+	transform: rotate(45deg) translate(111px,-132px);
+	z-index:-1;
+}
+.hurstbridge:after {
+	content:"";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 255px;
+	background: #16c0e9;
+	z-index:-1;
+}
+.hurstbridge .multizone {
+	bottom: 182px;
+	z-index:-1;
+}
+
+.hurstbridge .label {
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(-45deg) translate(12px, 4px) !important;
+	transform: rotate(-45deg) translate(12px, 4px) !important;
+}
+
+#westgarth {
+	bottom: 40px;
+}
+#dennis {
+	bottom: 68px;
+}
+#fairfield {
+	bottom: 95px;
+}
+#alphington {
+	bottom: 122px;
+}
+#darebin {
+	bottom: 150px;
+}
+#ivanhoe {
+	bottom: 177px;
+}
+#ivanhoe > .label {
+	-webkit-transform: rotate(-45deg) translate(13px, 6px) !important;
+	transform: rotate(-45deg) translate(13px, 6px) !important;
+}
+#eaglemont {
+	bottom: 205px;
+}
+#heidelberg {
+	bottom: 229px;
+}
+#heidelberg > .label {
+	-webkit-transform: rotate(-45deg) translate(13px, 6px) !important;
+	transform: rotate(-45deg) translate(13px, 6px) !important;
+}
+
+#rosanna {
+	bottom: 257px;
+}
+#macleod {
+	bottom: 280px;
+}
+#macleod > .label {
+	-webkit-transform: rotate(-45deg) translate(13px, 6px) !important;
+	transform: rotate(-45deg) translate(13px, 6px) !important;
+}
+#watsonia {
+	bottom: 313px;
+}
+
+#watsonia > .label {
+	-webkit-transform: rotate(-45deg) translate(13px, 6px) !important;
+	transform: rotate(-45deg) translate(13px, 6px) !important;
+}
+#greensborough {
+	bottom: 345px;
+}
+#greensborough > .label {
+	-webkit-transform: rotate(-45deg) translate(13px, 6px) !important;
+	transform: rotate(-45deg) translate(13px, 6px) !important;
+}
+#montmorency {
+	bottom: 374px;
+}
+
+#eltham {
+	bottom: 398px;
+}
+#eltham > .label {
+	-webkit-transform: rotate(-45deg) translate(13px, 6px) !important;
+	transform: rotate(-45deg) translate(13px, 6px) !important;
+}
+
+#diamondcreek {
+	bottom: 429px;
+}
+#wattleglen {
+	bottom: 454px;
+}
+#hurstbridge {
+	bottom: 480px;
+	z-index:2;
+}
+#hurstbridge > .label {
+	font-weight: bold;
+}
+
+/* ------------------ lilydale ---------------- */
+
+
+.lilydale {
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 791px;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(270deg) translate(-55px,188px);
+	transform: rotate(270deg) translate(-55px,188px);
+	z-index:-1;
+}
+.lilydale:after {
+	content:"";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 14px;
+	height: 300px;
+	background: #16c0e9;
+	z-index:-1;
+}
+
+.lilydale .multizone {
+	position: absolute;
+	left: 0px;
+	top: 398px;
+	width: 14px;
+	height: 106px;
+}
+.lilydale .multizone:before {
+	border: none;
+	border-bottom: 1px solid #FFF;
+	border-right: 1px solid #FFF;
+}
+.lilydale .multizone:after {
+	border: none;
+	border-top: 1px solid #FFF;
+	border-left: 1px solid #FFF;
+}
+
+.lilydale .label {
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg) translate(25px, -6px) !important;
+	transform: rotate(45deg) translate(25px, -6px) !important;
+}
+
+
+#richmond {
+	top: 90px;
+}
+
+#eastrichmond {
+	top: 134px;
+}
+#eastrichmond > .label {
+	text-indent: -12px;
+	line-height: 1.1;
+	-webkit-transform: rotate(45deg) translate(26px, -18px) !important;
+	transform: rotate(45deg) translate(26px, -18px) !important;
+}
+#burnley {
+	top: 170px;
+}
+
+#hawthorn {
+	top: 210px;
+}
+#glenferrie {
+	top: 245px;
+}
+#auburn {
+	top: 285px;
+}
+
+#camberwell {
+	top: 320px;
+}
+#eastcamberwell {
+	top: 360px;
+}
+#canterbury {
+	top: 395px;
+}
+#chatham {
+	top: 428px;
+}
+#surreyhills {
+	top: 460px;
+}
+#montalbert {
+	top: 499px;
+}
+
+#boxhill {
+	top: 534px;
+}
+#laburnam {
+	top: 572px;
+}
+#blackburn {
+	top: 604px;
+}
+
+#nunawading {
+	top: 642px;
+}
+#mitcham {
+	top: 678px;
+}
+#heatherdale {
+	top: 718px;
+}
+#ringwood {
+	top: 752px;
+}
+
+
+/* ----- lilydale fork ------------ */
+
+.lilydaleB {
+	position:absolute;
+	bottom: 0;
+	left: 0;
+	width: 14px;
+	height: 150px;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(315deg) translate(-105px,105px);
+	transform: rotate(315deg) translate(-105px,105px);
+	z-index:-1;
+	background: #16c0e9;
+}
+
+.lilydaleB .label {
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(135deg) translate(14px, -9px) !important;
+	transform: rotate(135deg) translate(14px, -9px) !important;
+}
+
+.lilydaleB .line-terminus {
+	bottom: 0;
+}
+
+#ringwoodeast {
+	top: 30px;
+}
+
+#croydon {
+	top: 63px;
+}
+#mooroolbark {
+	top: 100px;
+}
+#lilydale {
+	top: 136px;
+	z-index: 2;
+}
+#lilydale > .label {
+	font-weight: bold;
+	-webkit-transform: rotate(135deg) translate(10px, -18px) !important;
+	transform: rotate(135deg) translate(10px, -18px) !important;
+}
+
+/* ----- belgrave fork ------------ */
+
+
+.belgrave {
+	position:absolute;
+	bottom: 0;
+	left: 0;
+	width: 14px;
+	height: 285px;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg) translate(193px,193px);
+	transform: rotate(45deg) translate(193px,193px);
+	z-index:-1;
+	background: #16c0e9;
+}
+
+
+.belgrave .label {
+	text-align: right;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg) translate(-206px, 2px) !important;
+	transform: rotate(45deg) translate(-206px, 2px) !important;
+}
+.belgrave .line-terminus {
+	bottom: 0;
+}
+#heathmont {
+	top: 30px;
+}
+#bayswater {
+	top: 63px;
+}
+#boronia {
+	top: 100px;
+}
+
+#ferntree {
+	top: 136px;
+}
+#upperferntree {
+	top: 172px;
+}
+#upwey{
+	top: 208px;
+}
+#tecoma {
+	top: 240px;
+}
+#belgrave {
+	top: 270px;
+	z-index: 2;
+}
+#belgrave > .label {
+	font-weight: bold;
+}
+
+/* ------- glenwaverly line ------------- */
+
+.glenwaverly {
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 365px;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg) translate(120px,120px);
+	transform: rotate(45deg) translate(120px,120px);
+	z-index:-1;
+}
+
+.glenwaverly:after {
+	content:"";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 14px;
+	height: 122px;
+	background: #16c0e9;
+	z-index:-1;
+}
+.glenwaverly .label {
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg) translate(20px, -8px) !important;
+	transform: rotate(45deg) translate(20px, -8px) !important;
+}
+.glenwaverly .line-terminus {
+	bottom: 0;
+}
+.glenwaverly .multizone {
+	top: 181px;
+	height: 62px;
+	z-index:1;
+}
+#heyington {
+	top: 25px;
+}
+#kooyong {
+	top: 55px;
+}
+#tooronga {
+	top: 85px;
+}
+#gardiner {
+	top: 115px;
+}
+#gleniris {
+	top: 145px;
+}
+#darling {
+	top: 175px;
+	z-index:2;
+}
+#eastmalvern {
+	top: 205px;
+	z-index:2;
+}
+#holmesglen {
+	top: 237px;
+	z-index:2;
+}
+#jordanville {
+	top: 265px;
+}
+#mountwaverly {
+	top: 290px;
+}
+#syndal {
+	top: 322px;
+}
+#glenwaverly {
+	top: 350px;
+	z-index:2;
+}
+#glenwaverly > .label {
+	font-weight: bold;
+}
+
+/* ------- alamein line ------------- */
+
+.alamein {
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 192px;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg) translate(227px,227px);
+	transform: rotate(45deg) translate(227px,227px);
+	z-index:-1;
+}
+
+.alamein .label {
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg) translate(20px, -8px) !important;
+	transform: rotate(45deg) translate(20px, -8px) !important;
+}
+.alamein .line-terminus {
+	bottom: 0;
+}
+
+#riversdale {
+	top: 25px;
+}
+#willison {
+	top: 55px;
+}
+#hartwell {
+	top: 85px;
+}
+#burwood {
+	top: 115px;
+}
+#ashburton {
+	top: 145px;
+}
+#alamein {
+	top: 181px;
+	z-index:2;
+}
+#alamein > .label {
+	font-weight: bold;
+}
+
+/* ------- sandringham line ------------- */
+
+.sandringham {
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 419px;
+	z-index:-1;
+	-webkit-transform: translate(278px,55px);
+	transform: translate(278px,55px);
+}
+.sandringham:after {
+	content:"";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 14px;
+	height: 70px;
+	background: #16c0e9;
+	z-index:-1;
+}
+.sandringham .line-terminus {
+	bottom: 0;
+}
+.sandringham .label {
+	text-align:right;
+	-webkit-transform: translate(-209px,-2px);
+	transform: translate(-209px,-2px);
+}
+.sandringham .multizone {
+	position: absolute;
+	width: 14px;
+	height: 65px;
+	background: #FFF;
+	top: 288px;
+	left: 0;
+	-webkit-transform: rotate(180deg) scaleX(-1);
+	transform: rotate(180deg) scaleX(-1);
+}
+#southyarra {
+	top: 75px;
+}
+#prahran {
+	top: 105px;
+}
+#windsor {
+	top: 135px;
+}
+#balaclava {
+	top: 165px;
+}
+#ripponlea {
+	top: 195px;
+}
+#elsternwick {
+	top: 224px;
+}
+#gardenvale {
+	top: 255px;
+}
+#northbrighton {
+	top: 285px;
+}
+#middlebrighton {
+	top: 315px;
+}
+#brightonbeach {
+	top: 345px;
+}
+#hampton {
+	top: 376px;
+}
+#sandringham {
+	top: 405px;
+	z-index:2;
+}
+#sandringham > .label {
+	font-weight: bold;
+	-webkit-transform: translate(-212px,0px);
+	transform: translate(-212px,0px);
+}
+
+
+
+
+
+/* ------- pakenham line ------------- */
+
+.pakenham {
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 729px;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(-45deg) translate(-57px,62px);
+	transform: rotate(-45deg) translate(-57px,62px);
+	z-index:-1;
+}
+
+.pakenham:after {
+	content:"";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 14px;
+	height: 430px;
+	background: #16c0e9;
+	z-index:-1;
+}
+.pakenham .label {
+	text-align:left;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg) translate(20px, -8px) !important;
+	transform: rotate(45deg) translate(20px, -8px) !important;
+}
+.pakenham .line-terminus {
+	bottom: 0;
+}
+.pakenham .multizone {
+	top: 237px;
+	height: 62px;
+	z-index:1;
+	-webkit-transform: scaleY(-1);
+	transform: scaleY(-1);
+}
+.pakenham .line-continue {
+	left: 0;
+	bottom: -7px;
+	z-index:1;
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+#hawksburn {
+	top: 25px;
+}
+#toorak {
+	top: 55px;
+}
+#armadale {
+	top: 85px;
+}
+#malvern {
+	top: 115px;
+}
+#caulfield {
+	top: 143px;
+}
+#carnegie {
+	top: 175px;
+}
+#murrumbeena {
+	top: 203px;
+}
+#hughesdale {
+	top: 233px;
+	z-index:2;
+}
+#oakleigh {
+	top: 263px;
+	z-index:2;
+}
+#huntingdale {
+	top: 293px;
+	z-index:2;
+}
+#clayton {
+	top: 323px;
+}
+#westall {
+	top: 355px;
+}
+#springvale {
+	top: 387px;
+}
+#sandownpark {
+	top: 419px;
+}
+#noblepark {
+	top: 445px;
+}
+#yarraman {
+	top: 475px;
+}
+#dandenong {
+	top: 502px;
+}
+#hallam {
+	top: 535px;
+}
+#narrewarren {
+	top: 565px;
+}
+#berwick {
+	top: 595px;
+}
+
+#beaconsfield {
+	top: 625px;
+}
+#officer {
+	top: 655px;
+}
+#cardiniaroad {
+	top: 685px;
+}
+#pakenham {
+	top: 715px;
+	z-index:2;
+}
+#pakenham > .label {
+	font-weight: bold;
+	-webkit-transform: rotate(45deg) translate(22px, -6px) !important;
+	transform: rotate(45deg) translate(22px, -6px) !important;
+}
+
+/* ------- cranbourne line ------------- */
+
+.cranbourne {
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 104px;
+	background-color: #16c0e9;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg) translate(357px,357px);
+	transform: rotate(45deg) translate(357px,357px);
+	z-index:-1;
+}
+.cranbourne .label {
+	text-align:right;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(0deg) translate(-209px, -2px) !important;
+	transform: rotate(0deg) translate(-209px, -2px) !important;
+}
+.cranbourne .line-terminus {
+	z-index: -1;
+}
+
+#lynbrook {
+	top: 30px;
+}
+#merindapark {
+	top: 60px;
+}
+#cranbourne {
+	top: 90px;
+}
+#cranbourne > .label {
+	font-weight: bold;
+	-webkit-transform: rotate(0deg) translate(-213px, 0px) !important;
+	transform: rotate(0deg) translate(-213px, 0px) !important;
+}
+
+
+/* ------- frankston line ------------- */
+
+.frankston {
+	position:absolute;
+	top: 0;
+	left: 0;
+	li
+	/*background-color: #16c0e9;*/
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg) translate(104px,104px);
+	transform: rotate(45deg) translate(104px,104px);
+	z-index:-1;
+}
+.frankston .label {
+	text-align:right;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(0deg) translate(-209px, 0px) !important;
+	transform: rotate(0deg) translate(-209px, 0px) !important;
+}
+.frankston:after {
+	content:"";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 14px;
+	height: 460px;
+	background: #16c0e9;
+	z-index:-1;
+}
+.frankston .multizone {
+	top: 63px;
+	z-index: -1;
+}
+.frankston .line-terminus {
+	z-index: 1;
+}
+
+#glenhuntly {
+	top: 30px;
+}
+#ormond {
+	top: 60px;
+}
+#mckinnon {
+	top: 92px;
+}
+#bentleigh {
+	top: 120px;
+}
+#patterson {
+	top: 150px;
+}
+#moorabbin {
+	top: 177px;
+}
+#highett {
+	top: 210px;
+}
+#cheltenham {
+	top: 237px;
+}
+#mentone {
+	top: 267px;
+}
+#parkdale {
+	top: 300px;
+}
+#mordialloc {
+	top: 327px;
+}
+#aspendale {
+	top: 360px;
+}
+#edithvale {
+	top: 390px;
+}
+#chelsea {
+	top: 420px;
+}
+#bonbeach {
+	top: 450px;
+}
+#carrum {
+	top: 478px;
+}
+#seaford {
+	top: 512px;
+}
+#kananook {
+	top: 542px;
+}
+#frankston {
+	top: 570px;
+	z-index: 2;
+}
+#frankston > .label {
+	font-weight: bold;
+	-webkit-transform: rotate(0deg) translate(-213px, 0px) !important;
+	transform: rotate(0deg) translate(-213px, 0px) !important;
+}
+
+/* --------------- Stony point line ------- */
+
+.stonypoint {
+	position:absolute;
+	bottom: 0;
+	left: 30px;
+	width: 267px;
+	height: 14px;
+	background-color: #16c0e9;
+	z-index:-1;
+}
+.stonypoint:after {
+	content: "";
+	position:absolute;
+	top: -2px;
+	left: 0;
+	background-color: #16c0e9;
+	width: 3px;
+	height: 18px;
+}
+.stonypoint  .station:not(.premium) {
+	top: 3px;
+}
+.stonypoint .label {
+	text-align:left;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(-45deg) translate(19px, 0px) !important;
+	transform: rotate(-45deg) translate(19px, 0px) !important;
+}
+.stonypoint .line-terminus {
+	left: auto;
+	right: -9px;
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.stonypoint .line-label {
+	position:absolute;
+	top: 14px;
+	left: 70px;
+}
+#leawarra {
+	left: 15px;
+}
+#baxter {
+	left: 45px;
+}
+#somerville {
+	left: 75px;
+}
+#tyabb {
+	left: 105px;
+}
+#hastings {
+	left: 135px;
+}
+#bittern {
+	left: 165px;
+}
+#morradoo {
+	left: 195px;
+}
+#cribpoint {
+	left: 225px;
+}
+#stonypoint {
+	left: 255px;
+	z-index: 2;
+}
+#stonypoint  > .label {
+	font-weight: bold;
+	-webkit-transform: rotate(-45deg) translate(15px, 0px) !important;
+	transform: rotate(-45deg) translate(15px, 0px) !important;
+}
+/* ------------ Sunbruy line --------------- */
+
+
+.sunbury {
+	position:absolute;
+	top: 20px;
+	left: 1000px;
+	width: 220px;
+	height: 14px;
+	/*background-color: #16c0e9;*/
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(0deg) translate(-220px,415px);
+	transform: rotate(0deg) translate(-220px,415px);
+	z-index:-1;
+}
+
+
+.sunbury .station {
+	left: auto;
+	right: 0px;
+	top: 3px;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+
+}
+.sunbury > .station .label {
+	text-align:right;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(0deg) translate(-211px, 0px) !important;
+	transform: rotate(0deg) translate(-211px, 0px) !important;
+}
+.sunbury .station.premium {
+	top: 0px;
+}
+#southkensington {
+
+right: 43px;
+}
+#southkensington  > .label {
+	text-indent: 10px;
+	width: 80px;
+	-webkit-transform: rotate(0deg) translate(-91px, 0px) !important;
+	transform: rotate(0deg) translate(-91px, 0px) !important;
+}
+
+#footscray {
+	right: 80px;
+}
+#middlefootscray {
+	right: 120px;
+}
+
+#westfootscray {
+	right: 150px;
+}
+#tottenham {
+	right: 180px;
+}
+#sunshine {
+	right: 210px;
+}
+
+
+
+
+.sunburyB {
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 210px;
+	height: 14px;
+	background-color: #16c0e9;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg) translate(-205px,-4px);
+	transform: rotate(45deg) translate(-205px,-4px);
+	z-index:-1;
+}
+.sunburyB .label {
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(0deg) translate(15px, -10px)!important;
+	transform: rotate(0deg) translate(15px, -10px) !important;
+}
+
+.sunburyB .multizone {
+	position:absolute;
+	top: 0;
+	right: 0;
+	height: 30px;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(90deg) translate(0px,-180px) scaleY(-1);
+	transform: rotate(90deg) translate(0px,-180px) scaleY(-1);
+}
+.sunburyB .station {
+	left: auto;
+	right: 0px;
+	top: 3px;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+
+}
+
+.sunburyB .line-terminus {
+	position:absolute;
+	top: 0;
+	right: 0;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(90deg) translate(-7px,-15px);
+	transform: rotate(90deg) translate(-7px,-15px);
+	z-index:1;
+}
+
+.sunburyB .line-continue {
+	position:absolute;
+	top: 0;
+	left: 0;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(-90deg) translate(-14px,-14px);
+	transform: rotate(-90deg) translate(-14px,-14px);
+}
+
+#albion {
+	right: 25px;
+}
+
+#ginifer {
+	right: 55px;
+}
+#stalbans {
+	right: 82px;
+}
+#keilorplains {
+	right: 115px;
+}
+#watergardens {
+	right: 142px;
+}
+#diggersrest {
+	right: 175px;
+}
+#sunbury {
+	right: 202px;
+	z-index:2;
+}
+#sunbury > .label {
+	font-weight: bold;
+}
+
+/* --------------- Melton Vline ------------- */
+
+.melton {
+	position:absolute;
+	top: 0;
+	left: -266px;
+	width: 116px;
+	height: 14px;
+	background-color: #16c0e9;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: translate(125px,0px);
+	transform: translate(125px,0px);
+	z-index:-1;
+}
+.melton:after {
+	content: "";
+	position:absolute;
+	top: -2px;
+	right: 0;
+	background-color: #16c0e9;
+	width: 3px;
+	height: 18px;
+}
+.melton .line-terminus {
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+.melton .line-continue {
+	top:3px;
+	left: -12px;
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+	-webkit-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+.melton .line-label {
+	position:absolute;
+	left: 38px;
+	top: -18px;
+}
+#ardeer {
+	right: 15px;
+}
+#deerpark {
+	right: 45px;
+}
+#rockbank {
+	right: 75px;
+}
+#melton {
+	right: 105px;
+	z-index: 2;
+}
+#melton > .label {
+	-webkit-transform: rotate(0deg) translate(-214px, 0px) !important;
+	transform: rotate(0deg) translate(-214px, 0px) !important;
+}
+
+
+/* ------------ Williamstown line --------------- */
+
+
+.williamstown {
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 282px;
+	/*background-color: #16c0e9;*/
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: translate(125px,0px);
+	transform: translate(125px,0px);
+	z-index:-1;
+}
+
+
+.williamstown .station {
+	left: 0px;
+	top: 3px;
+	-webkit-transform: rotate(0deg);
+	transform: rotate(0deg);
+
+}
+.williamstown > .station .label {
+	text-align:right;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(0deg) translate(-211px, 0px);
+	transform: rotate(0deg) translate(-211px, 0px);
+}
+
+.williamstown .station .label:not(.left-label) {
+	text-align:left;
+	-webkit-transform: rotate(0deg) translate(15px, 0px);
+	transform: rotate(0deg) translate(15px, 0px);
+}
+
+.williamstown .line-terminus {
+	bottom: 0;
+}
+
+#seddon {
+	top: 90px;
+}
+#yarraville {
+	top: 120px;
+}
+#spotswood {
+	top: 150px;
+}
+#newport {
+	top: 178px;
+}
+#northwilliamstown {
+	top: 210px;
+}
+
+#williamstownbeach {
+	top: 240px;
+}
+
+#williamstown {
+	top: 268px;
+	z-index:2;
+}
+#williamstown > .label {
+	font-weight: bold;
+	-webkit-transform: rotate(0deg) translate(22px, 0px) !important;
+	transform: rotate(0deg) translate(22px, 0px) !important;
+}
+
+/* ------------ Werribee line --------------- */
+
+.werribeeA {
+	position:absolute;
+	top: 177px;
+	left: -101px;
+	width: 102px;
+	height: 14px;
+	z-index:-1;
+}
+.werribee {
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 14px;
+	height: 238px;
+	/*background-color: #16c0e9;*/
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg) translate(51px,207px);
+	transform: rotate(45deg) translate(51px,207px);
+	z-index:-1;
+}
+.werribee .label {
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(-45deg) translate(-220px,0px);
+	transform: rotate(-45deg) translate(-220px,0px);
+}
+.werribee .line-continue {
+	bottom: -15px;
+	left: 14px;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+.sharp-corner {
+	width: 14px;
+	height: 14px;
+	overflow: hidden;
+	position: absolute;
+	bottom: 27px;
+	left: -105px;
+	z-index: -1;
+
+}
+.sharp-corner:before {
+	content: "";
+	width: 28px;
+	height: 28px;
+	position: absolute;
+	top: -14px;
+	left: -14px;
+	border: 14px solid #ffcb08;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+}
+.werribee:after {
+	content:"";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 14px;
+	height: 154px;
+	background: #16c0e9;
+	z-index:-1;
+}
+.werribee:before {
+	content:"";
+	width: 22px;
+	height: 22px;
+	position: absolute;
+	background: inherit;
+	top: -14px;
+	left: 0;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+}
+.werribeeB {
+	position:absolute;
+	top: 181px;
+	left: -105px;
+	width: 14px;
+	height: 60px;
+	z-index:-1;
+}
+.werribeeB .multizone {
+	position:absolute;
+	top: 0;
+	left: 0;
+	height: 62px;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(90deg) translate(60px,60px) scaleY(-1);
+	transform: rotate(90eg) translate(60px,60px) scaleY(-1);
+}
+.werribeeB .multizone:before {
+	border-top: none;
+}
+
+#seaholme {
+	top: 31px;
+}
+#altona {
+	top: 63px;
+	left: -6px;
+	z-index:2;
+}
+#westona {
+	top: 63px;
+	left: -34px;
+	z-index:2;
+}
+#westona > .label {
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(-45deg) translate(-220px,0px);
+	transform: rotate(-45deg) translate(-220px,0px);
+}
+
+
+#laverton {
+	top: 76px;
+}
+
+#aircraft {
+	top: 116px;
+}
+#williamslanding {
+	top: 150px;
+}
+#hopperscrossing {
+	top: 188px;
+}
+#hopperscrossing > .label {
+	width: 90px;
+	-webkit-transform: rotate(-45deg) translate(-110px,-10px);
+	transform: rotate(-45deg) translate(-110px,-10px);
+}
+#werribee {
+	top: 224px;
+	z-index:2;
+}
+#werribee > .label {
+	font-weight:bold;
+	width: 70px;
+	-webkit-transform: rotate(-45deg) translate(-84px,0px);
+	transform: rotate(-45deg) translate(-84px,0px);
+}
+
+/* -------------- THE BAY --------- */
+
+#thebay {
+	width: 500px;
+	height: 500px;
+
+	position: absolute;
+	top: 780px;
+	left: 220px;
+}
+
+#thebay > span {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 200px;
+	height: 200px;
+	background-color: #DDDCDC;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#thebay > span.angle45 {
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+#thebay #bay1 {
+	top: 40px;
+	right: 401px;
+	width: 200px;
+	height: 200px;
+}
+#thebay #bay2 {
+	top: -20px;
+	right: 291px;
+	width: 200px;
+	height: 200px;
+}
+#thebay #bay3 {
+	top: -20px;
+	right: 100px;
+	width: 40px;
+	height: 200px;
+}
+#thebay #bay4 {
+	top: 290px;
+	right: 0px;
+	width: 40px;
+	height: 200px;
+}
+#thebay #bay5 {
+	top: 474px;
+	right: -46px;
+	width: 200px;
+	height: 100px;
+}
+#thebay #bay6 {
+	top: 43px;
+	right: 537px;
+	width: 70px;
+	height: 100px;
+}
+#thebay #bay7 {
+	top: -17px;
+	right: 132px;
+	width: 367px;
+	height: 100px;
+}
+#thebay #bay8 {
+	top: 0px;
+	right: 114px;
+	width: 200px;
+	height: 380px;
+}
+#thebay #bay9 {
+	top: 294px;
+	right: 35px;
+	width: 200px;
+	height: 200px;
+}
+#thebay #bay10 {
+	top: 314px;
+	right: 15px;
+	width: 200px;
+	height: 306px;
+}
+#thebay #bay11 {
+	top: 179px;
+	right: 538px;
+	width: 200px;
+	height: 500px;
+}
+#thebay #bay12 {
+	top: 482px;
+	right: 79px;
+	width: 659px;
+	height: 200px;
+}
+
+#thebay #bay13 {
+	top: 50px;
+	right: 200px;
+	width: 360px;
+	height: 450px;
+}
+
+.baylabel {
+	position: absolute;
+	top: 70px;
+	right: 210px;
+	z-index:2;
+	font-weight: bold;
+	font-size: 16px;
+	color: #565656;
+}
+
+
+/* ------------- LEGEND -------------- */
+
+#legend {
+	width: 500px;
+	height: 40px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+	background-color: #FFF;
+	border: 1px solid #666666;
+	position: absolute;
+	top: 290px;
+	right: 180px;
+	padding-left: 8px;
+	padding-top: 1px;
+}
+#legend .pticon {
+	position: absolute;
+	top: -99px;
+	left: 0px;
+	width: 60px;
+	height: 60px;
+	border: 3px solid #000;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+
+#legend .pticon .traincab {
+	position: absolute;
+	top: -2px;
+	left: -7px;
+	width: 35px;
+	height: 27px;
+	border: 2px solid #000;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+#legend .pticon .traincab:before {
+	content: "";
+	width: 4px;
+	background: #000;
+	height: 2px;
+	position: absolute;
+	bottom: 3px;
+	right: 5px;
+}
+#legend .pticon .traincab:after {
+	content: "";
+	width: 4px;
+	background: #000;
+	height: 2px;
+	position: absolute;
+	bottom: 3px;
+	left: 5px;
+}
+
+#legend .pticon .trainwin {
+	position: absolute;
+	top: 2px;
+	left: -1px;
+	width: 23px;
+	height: 12px;
+	border: 2px solid #000;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+#legend .pticon .trainwin:after {
+	content: "";
+	width: 2px;
+	background: #000;
+	height: 10px;
+	position: absolute;
+	top: 0px;
+	left: 8px;
+}
+#legend .pticon .traintrack {
+	position: absolute;
+	top: 28px;
+	left: 7px;
+	width: 2px;
+	height: 2px;
+}
+
+#legend .pticon .traintrack:before {
+	content: "";
+	position: absolute;
+	top: -3px;
+	left: -6px;
+	width: 2px;
+	height: 10px;
+	background: #000;
+
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+	-webkit-transform: rotate(20deg);
+	transform: rotate(20deg);
+}
+#legend .pticon .traintrack:after {
+	content: "";
+	position: absolute;
+	top: -3px;
+	right: -10px;
+	width: 2px;
+	height: 10px;
+	background: #000;
+
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+	-webkit-transform: rotate(-20deg);
+	transform: rotate(-20deg);
+}
+#legend .pticon .trainsleep {
+	position: absolute;
+	top: 28px;
+	left: 7px;
+	width: 2px;
+	height: 2px;
+}
+
+#legend .pticon .trainsleep:before {
+	content: "";
+	position: absolute;
+	top: -1px;
+	left: -9px;
+	width: 24px;
+	height: 2px;
+	background: #000;
+
+}
+#legend .pticon .trainsleep:after {
+	content: "";
+	position: absolute;
+	top: 3px;
+	right: -16px;
+	width: 30px;
+	height: 2px;
+	background: #000;
+
+}
+#legend .title {
+	position: absolute;
+	top: -92px;
+	left: 70px;
+	font-size: 46px;
+
+}
+#legend .detail {
+	position: absolute;
+	top: 132px;
+	left: 0px;
+	width: 550px;
+
+}
+#legend .zonelabel {
+	position: absolute;
+	top: -10px;
+	left: 28px;
+	width: 130px;
+	height: 8px;
+	text-align: center;
+	border-top: 1px solid #000;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+}
+#legend .zonelabel span {
+	width: 150px;
+	font-size: 12px;
+	font-weight: bold;
+	position: absolute;
+	top: -30px;
+	left: -30px;
+}
+
+#legend .line {
+	width: 50px;
+	height: 14px;
+	position: relative;
+	top: -1px;
+}
+#legend i, #legend span {
+	position: static;
+	display: inline;
+	float: left;
+	margin: 17px;
+	margin-top: 13px;
+}
+
+#legend .coach {
+	position: relative;
+	top: 3px;
+}
+#legend .parking {
+	position: relative;
+	top: -3px;
+}
+#legend .host {
+	position: relative;
+	top: 1px;
+}
+#legend .premium {
+	position: relative;
+	top: -1px;
+}
+
+#legend .label {
+	width: 100px;
+	text-align:right;
+	position: absolute;
+	left: -60px;
+	top: 25px;
+	-webkit-transform-origin: 100% 100%;
+	transform-origin: 100% 100%;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+#legend #lzone1 {
+	left: -60px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+#legend #lzone2 {
+	left: 20px;
+	font-weight: bold;
+	font-size: 16px;
+}
+#legend #ltram {
+	left: 78px;
+}
+#legend #lbus {
+	left: 128px;
+}
+#legend #lvline {
+	left: 170px;
+}
+#legend #lcoach {
+	left: 219px;
+}
+#legend #lprem {
+	left: 268px;
+}
+#legend #lhost {
+	left: 310px;
+}
+#legend #lpark {
+	left: 350px;
+}
 }
 
 #legend .label {

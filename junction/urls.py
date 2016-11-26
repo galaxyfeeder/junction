@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from main.views import LineDetailView
+from main.views import LineDetailView, StationDisplayDynamicView, StationDisplayStaticView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include('main.api')),
     url(r'^line/(?P<pk>\d+)/$', LineDetailView.as_view()),
+    url(r'^station/(?P<pk>\d+)/static/$', StationDisplayStaticView.as_view()),
+    url(r'^station/(?P<pk>\d+)/dynamic/$', StationDisplayDynamicView.as_view()),
 ]
