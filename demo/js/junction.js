@@ -108,7 +108,7 @@ function addBuses(buses) {
 			myid: buses[i].id,
 		});
 		console.log(buses[i]);
-		google.maps.event.addListener(marker, "click", function(event) { {# https://developers.google.com/maps/articles/phpsqlinfo_v3 #}
+		google.maps.event.addListener(marker, "click", function(event) { ////{# https://developers.google.com/maps/articles/phpsqlinfo_v3 #}
 			// ?????????????????
 			showBusControls(this);
 			//showStationControls(this.myid);
@@ -127,7 +127,7 @@ function parseText(text) {
 	addDirections(false);
 }
 function addStations(stations) {
-	var bounds = new google.maps.LatLngBounds(); {# http://stackoverflow.com/questions/1556921/google-map-api-v3-set-bounds-and-center?noredirect=1&lq=1 #}
+	var bounds = new google.maps.LatLngBounds(); //{# http://stackoverflow.com/questions/1556921/google-map-api-v3-set-bounds-and-center?noredirect=1&lq=1 #}
 	
 	for(i=0;i<stations.length;i++) {
 		console.log(stations[i]);
@@ -149,9 +149,9 @@ function addStations(stations) {
 			goto: 1
 		});
 		bounds.extend(marker.position);
-		google.maps.event.addListener(marker, "click", function(event) { {# https://developers.google.com/maps/articles/phpsqlinfo_v3 #}
+		google.maps.event.addListener(marker, "click", function(event) { //{# https://developers.google.com/maps/articles/phpsqlinfo_v3 #}
 			//console.log(stations.stations[i].id);
-			//console.log(this.position.lat() + " - " + this.position.lng()); {# http://stackoverflow.com/questions/6374329/get-latitude-and-longitude-of-marker-onclick #}
+			//console.log(this.position.lat() + " - " + this.position.lng()); //{# http://stackoverflow.com/questions/6374329/get-latitude-and-longitude-of-marker-onclick #}
 			//console.log(this.myid);
 			showStationControls(this);
 		});
