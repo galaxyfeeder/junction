@@ -3,7 +3,23 @@ from rest_framework import serializers
 from main.models import Bus, Station, Stop, Line
 
 
+class SimpleStopSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Stop
+        fields = ('id', 'order', 'people_waiting')
+        read_only_fields = ('id', 'order')
+
+
 class StationSerializer(serializers.HyperlinkedModelSerializer):
+    stops = SimpleStopSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Station
+        fields = ('id', 'name', 'code', 'latitude', 'longitude', 'stops')
+        read_only_fields = ('id', 'name', 'code', 'latitude', 'longitude')
+
+
+class SimpleStationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Station
         fields = ('id', 'name', 'code', 'latitude', 'longitude')
@@ -11,7 +27,7 @@ class StationSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class StopSerializer(serializers.HyperlinkedModelSerializer):
-    station = StationSerializer(read_only=True)
+    station = SimpleStationSerializer(read_only=True)
 
     class Meta:
         model = Stop

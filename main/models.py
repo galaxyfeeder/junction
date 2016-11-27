@@ -25,7 +25,7 @@ class Line(models.Model):
 
 class Stop(models.Model):
     order = models.PositiveIntegerField()
-    station = models.ForeignKey(Station)
+    station = models.ForeignKey(Station, related_name='stops')
     line = models.ForeignKey(Line, related_name='stops')
     people_waiting = models.PositiveIntegerField(default=0)
     people_leaving = models.PositiveIntegerField(default=0)
