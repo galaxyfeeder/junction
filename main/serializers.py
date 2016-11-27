@@ -6,8 +6,8 @@ from main.models import Bus, Station, Stop, Line
 class SimpleStopSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Stop
-        fields = ('id', 'order', 'people_waiting')
-        read_only_fields = ('id', 'order')
+        fields = ('id', 'order', 'line', 'people_waiting', 'people_leaving', 'travel_time')
+        read_only_fields = ('id', 'order', 'line', 'travel_time')
 
 
 class StationSerializer(serializers.HyperlinkedModelSerializer):
@@ -31,8 +31,8 @@ class StopSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Stop
-        fields = ('id', 'order', 'station', 'people_waiting')
-        read_only_fields = ('id', 'order', 'station')
+        fields = ('id', 'order', 'station', 'line', 'people_waiting', 'people_leaving', 'travel_time')
+        read_only_fields = ('id', 'order', 'station', 'line', 'travel_time')
 
 
 class SimpleLineSerializer(serializers.HyperlinkedModelSerializer):
