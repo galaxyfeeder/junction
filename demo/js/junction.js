@@ -108,7 +108,7 @@ function addBuses(buses) {
 			myid: buses[i].id,
 		});
 		console.log(buses[i]);
-		google.maps.event.addListener(marker, "click", function(event) { ////{# https://developers.google.com/maps/articles/phpsqlinfo_v3 #}
+		google.maps.event.addListener(marker, "click", function(event) { //{# https://developers.google.com/maps/articles/phpsqlinfo_v3 #}
 			// ?????????????????
 			showBusControls(this);
 			//showStationControls(this.myid);
@@ -144,7 +144,7 @@ function addStations(stations) {
 			map: map,
 			icon: image,
 			code: stations[i].station.code,
-			load: stations[i].station.load,
+			load: stations[i].people_waiting,
 			myid: stations[i].station.id,
 			goto: 1
 		});
@@ -164,9 +164,20 @@ function showStationControls(station) {
 	$(".item-title").text("Station "+station.code);
 	$(".bus-control").hide();
 	$(".station-control").show();
+	/*$.get( "http://junction.westeurope.cloudapp.azure.com/api/station/" + station.myid + "/?format=json", function( data ) {
+		var stops = data.stops;
+		var somme = 0;
+		for (i=0;i<stops.length;i++) {
+			var stop = stops[i];
+			somme += stop.people_waiting;
+		}
+		$("#station-count").html(somme);
+		//parseLines(data);
+	}); */
 	currentBus = null;
 	currentStation.id = station.myid;
 	currentStation.load = station.load;
+	$("#station-count").html(currentStation.load);
 }
 function showBusControls(bus) {
 	$(".item-title").text("Bus " + bus.code);
@@ -298,12 +309,21 @@ $("#bus-load").on("slideStop", function(event) {
 	}
 });
 
+function changeLoad(load) {
+	currentStation.load = load;
+	$("#station-count").html(load);
+	getStationById(currentStation.id).load = load;
+	//API REQUEST !!!!!
+}
+
 $("#station-less").on("click", function() {
-	
+	var tmp = currentStation.load -2;
+	if (tmp < 0) tmp = 0;
+	changeLoad(tmp);
 });
 $("#station-0").on("click", function() {
-	
+	changeLoad(0);
 });
 $("#station-more").on("click", function() {
-	
+	changeLoad(currentStation.load +2);
 });
