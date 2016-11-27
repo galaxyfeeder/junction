@@ -23,7 +23,7 @@
         <div class="hr"></div>
         <div class="row">
         <h2>NEXT BUSES</h2>
-            {% for stop in station.stop_set.all %}
+            {% for stop in station.stops.all %}
                 <div class="col-xs-6">
                     <div class="row bus-time-entry">
                         <div class="col-xs-2">
@@ -116,7 +116,7 @@
             <h2>REQUEST BUS STOP</h2>
             <br>
             <div style="margin: auto">
-                {% for stop in station.stop_set.all %}
+                {% for stop in station.stops.all %}
                     <div class="col-xs-3">
                         <div class="line-number-container map-button" id="button-line-{{ stop.line.pk }}">
                             <span class="line-number-button">{{ stop.line.number }}</span>
@@ -125,7 +125,7 @@
                 {% endfor %}
             </div>
         </div>
-        {% for stop in station.stop_set.all %}
+        {% for stop in station.stops.all %}
             <div class="map-wrapper full-size" id="line-{{ stop.line.pk }}" style="display: none;">
 
                 <div class="line white horizontal-bottom full-line" style="width: 100%">

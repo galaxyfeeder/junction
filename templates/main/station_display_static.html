@@ -21,9 +21,9 @@
             </div>
         </div>
         <div class="hr"></div>
-        <div class="row">
-            <h2>NEXT BUSES STOPING HERE</h2>
-            {% for stop in station.stop_set.all %}
+    <h2>NEXT BUSES STOPING HERE</h2>
+        <div class="row" id="next-buses">
+            {% for stop in station.stops.all %}
             <div class="row bus-entry">
                 <div class="col-xs-2">
                     <div class="line-number-container">
@@ -60,7 +60,7 @@
         </div>
         <img class="divider" src="/static/img/divider.svg">
         <div class="row">
-            <div id="map" class="busses-{{ station.stop_set.count }}"></div>
+            <div id="map" class="busses-{{ station.stops.count }}"></div>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -344,7 +344,85 @@
 		$("#btn-hide-complete").hide();
 	});
 
+    var res;
+
+    var last = false;
+
+    function test() {
+        $.ajax({url: "/api/station/{{ station.pk }}/", success: function(result){
+            console.log(result);
+            res = result;
+            var station = result;
+            var stops = result['stops'];
+
+            $('#next-buses').html("");
+
+            for(i=0; i < stops.length; i++){
+
+                var stop = stops[i];
+
+                if (stop['people_waiting'] > 0 && stop['people_leaving'] > 0){
+
+                    $.ajax({url: stop['line'], success: function(result){
+                        console.log(result);
+                        line = result;
+                        line_stops = result['stops'];
+
+                        compileLine(station, line, line_stops);
+                    }});
+
+                }
+
+
+
+            }
+        }});
+    }
+
+    function compileLine(station, line, stops){
+        result = '<div class="row bus-entry"> <div class="col-xs-2"><div class="line-number-container"><span class="line-number">'+line['number']+'</span></div></div>'+
+                '<div class="col-xs-10" style="margin-top: -10px;"> <div class="col-xs-9"><span class="destination">'+stops[stops.length-1]['station']['name']+'</span></div>'+
+                '<div class="col-xs-3 align-right"><span class="time-left">2 min</span></div>'+
+                '<div class="col-xs-12"><div class="map-wrapper"><div class="line white horizontal-bottom full-line" style="width: 100%"><div class="line red horizontal-bottom line-progress"></div>';
+
+        for(i=0; i < stops.length; i++){
+            if(i == 0 || i == stops.length-1) {
+                result += '<span class="station premium" style="left: calc(('+i+' * (100% / ('+stops.length+' - 1))) - 7px)"></span>';
+            }else if(stops[i]['station']['id']==station['id']){
+                result += '<span class="station current" style="left: calc(('+i+' * (100% / ('+stops.length+' - 1))) - 7px)"></span>'+
+                        '<span class="current-marker" style="left: calc(('+i+' * (100% / ('+stops.length+' - 1))) - 14px)"></span>';
+            }else{
+                result += '<span class="station" style="left: calc(('+i+' * (100% / ('+stops.length+' - 1))) - 7px)"></span>';
+            }
+        }
+
+        result += '</div></div></div></div></div>';
+
+        $('#next-buses').append(result);
+        console.log(result);
+
+    }
+
+    test();
+
 </script>
 <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUhVDH00C242tqOr9-NI2jIyQEqcl4ZWo&callback=initMap"></script>
 </body>
 </html>
+
+
+
+
+
+
+                                {% for station_l in stop.line.stops.all %}
+
+                                </span>
+                                        {% if station_l.station == station %}
+
+                                        {% endif %}
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
