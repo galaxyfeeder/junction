@@ -19,10 +19,6 @@ function initMap() {
 		zoom: 13,
 		center: helsinki
 	});
-	{#marker = new google.maps.Marker({
-		position: helsinki,
-		map: map
-	}); #}
 	
 	//parseLines(lines);
 	$.get( "http://junction.westeurope.cloudapp.azure.com/api/line/?format=json", function( data ) {
