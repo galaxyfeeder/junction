@@ -21,8 +21,9 @@
             </div>
         </div>
         <div class="hr"></div>
-        <div class="row">
-        <h2>NEXT BUSES</h2>
+    <h2>NEXT BUSES</h2>
+        <div class="row" id="next-buses">
+
             {% for stop in station.stops.all %}
                 <div class="col-xs-6">
                     <div class="row bus-time-entry">
@@ -118,7 +119,7 @@
             <div style="margin: auto">
                 {% for stop in station.stops.all %}
                     <div class="col-xs-3">
-                        <div class="line-number-container map-button" id="button-line-{{ stop.line.pk }}">
+                        <div class="line-number-container map-button" id="button-line-{{ stop.line.pk }}" stop="{{ stop.pk }}">
                             <span class="line-number-button">{{ stop.line.number }}</span>
                         </div>
                     </div>
@@ -133,7 +134,7 @@
                     {% for station_l in stop.line.stops.all %}
 
                     <span class="station {% if forloop.last or forloop.first %}premium{% elif station_l.station == station %}current active{% elif station_l.passenger_count == 0 %}host{% endif %}" id="test" style="left: calc(({{ forloop.counter0 }} * (100% / ({{ stop.line.stops.count }} - 1))) - 7px)">
-                    <span class="label station-label left-label"><i class="count">X min</i></i>{{ station_l.station.name }}</span>
+                    <span class="label station-label left-label"><!--<i class="count">X min</i>--></i>{{ station_l.station.name }}</span>
                     </span>
                             {% if station_l.station == station %}
                         <span class="current-marker" style="left: calc(({{ forloop.counter0 }} * (100% / ({{ stop.line.stops.count }} - 1))) - 14px)"></span>
@@ -146,18 +147,77 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
-    $("")
+
+    var main_counter = 0;
 
     $(".map-button").click(function (event) {
 
         line = this.id.split("-")[2];
+        stop = $(this).attr('stop');
+
         console.log(line);
         console.log("#line-"+line);
         $(".full-size").hide();
         $(".map-button").removeClass("active");
         $(this).addClass("active");
         $("#line-"+line).show();
-    })
+        main_counter++;
+
+        $.ajax({url: '/stop/'+stop+'/addpeople/', success: function(result){
+            console.log(result);
+        }});
+
+        setTimeout(close, 5000, main_counter);
+
+    });
+
+    function close(counter) {
+        if(main_counter == counter) {
+            $(".map-button").removeClass("active");
+            $(".full-size").hide();
+        }
+    }
+
+    function test() {
+        $.ajax({url: "/api/station/{{ station.pk }}/", success: function(result){
+            console.log(result);
+            res = result;
+            var station = result;
+            var stops = result['stops'];
+
+            $('#next-buses').html("");
+
+            for(i=0; i < stops.length; i++){
+
+                var stop = stops[i];
+
+
+                    $.ajax({url: stop['line'], success: function(result){
+                        console.log(result);
+                        line = result;
+                        line_stops = result['stops'];
+
+                        compileLine(station, line, line_stops);
+                    }});
+
+            }
+        }});
+    }
+    var mins = 1;
+
+    function compileLine(station, line, stops){
+        result = '<div class="col-xs-6"><div class="row bus-time-entry"> <div class="col-xs-2"><div class="line-number-container"><span class="line-number">'+line['number']+'</span></div></div>'+
+                '<div class="col-xs-10" style="margin-top: 5px;"> <div class="col-xs-8"><span class="destination">'+stops[stops.length-1]['station']['name']+'</span></div>'+
+                '<div class="col-xs-4 align-right"><span class="time-left">'+mins+' min</span></div></div></div></div>';
+
+        mins++;
+
+        $('#next-buses').append(result);
+        console.log(result);
+
+    }
+
+    test();
 
 </script>
 <!--<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUhVDH00C242tqOr9-NI2jIyQEqcl4ZWo&callback=initMap"></script>-->

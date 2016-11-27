@@ -22,42 +22,10 @@
         </div>
         <div class="hr"></div>
     <h2>NEXT BUSES STOPING HERE</h2>
+        <br>
         <div class="row" id="next-buses">
-            {% for stop in station.stops.all %}
-            <div class="row bus-entry">
-                <div class="col-xs-2">
-                    <div class="line-number-container">
-                        <span class="line-number">{{ stop.line.number }}</span>
-                    </div>
-                </div>
-                <div class="col-xs-10" style="margin-top: -10px;">
-                    <div class="col-xs-9">
-                        <span class="destination">{{ stop.line.stops.last.station.name }}</span>
-                    </div>
-                    <div class="col-xs-3 align-right">
-                        <span class="time-left">{{ forloop.counter }} min</span>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="map-wrapper">
-
-                            <div class="line white horizontal-bottom full-line" style="width: 100%">
-                                <div class="line red horizontal-bottom line-progress"></div>
-                                {% for station_l in stop.line.stops.all %}
-
-                                <span class="station {% if forloop.last or forloop.first %}premium{% elif station_l.station == station %}current{% elif stop.will_stop %}host{% endif %}" id="test" style="left: calc(({{ forloop.counter0 }} * (100% / ({{ stop.line.stops.count }} - 1))) - 7px)">
-                                </span>
-                                        {% if station_l.station == station %}
-                                    <span class="current-marker" style="left: calc(({{ forloop.counter0 }} * (100% / ({{ stop.line.stops.count }} - 1))) - 14px)"></span>
-                                        {% endif %}
-
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <h3 style="margin: 0 30px;">NO UPCOMING BUSES</h3>
             </div>
-            {% endfor %}
-        </div>
         <img class="divider" src="/static/img/divider.svg">
         <div class="row">
             <div id="map" class="busses-{{ station.stops.count }}"></div>
@@ -360,8 +328,9 @@
             for(i=0; i < stops.length; i++){
 
                 var stop = stops[i];
+                console.log("PW:"+stop['people_waiting']);
 
-                if (stop['people_waiting'] > 0 && stop['people_leaving'] > 0){
+                if (stop['people_waiting'] > 0 || stop['people_leaving'] > 0){
 
                     $.ajax({url: stop['line'], success: function(result){
                         console.log(result);
@@ -379,10 +348,12 @@
         }});
     }
 
+    var mins = 1;
+
     function compileLine(station, line, stops){
         result = '<div class="row bus-entry"> <div class="col-xs-2"><div class="line-number-container"><span class="line-number">'+line['number']+'</span></div></div>'+
                 '<div class="col-xs-10" style="margin-top: -10px;"> <div class="col-xs-9"><span class="destination">'+stops[stops.length-1]['station']['name']+'</span></div>'+
-                '<div class="col-xs-3 align-right"><span class="time-left">2 min</span></div>'+
+                '<div class="col-xs-3 align-right"><span class="time-left">'+mins+' min</span></div>'+
                 '<div class="col-xs-12"><div class="map-wrapper"><div class="line white horizontal-bottom full-line" style="width: 100%"><div class="line red horizontal-bottom line-progress"></div>';
 
         for(i=0; i < stops.length; i++){
@@ -397,6 +368,8 @@
         }
 
         result += '</div></div></div></div></div>';
+
+        mins++;
 
         $('#next-buses').append(result);
         console.log(result);

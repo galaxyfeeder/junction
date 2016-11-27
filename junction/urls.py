@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import RedirectView
 
+import main
 from main.views import LineDetailView, StationDisplayDynamicView, StationDisplayStaticView
 
 urlpatterns = [
@@ -27,4 +28,5 @@ urlpatterns = [
     url(r'^line/(?P<pk>\d+)/$', LineDetailView.as_view()),
     url(r'^station/(?P<pk>\d+)/static/$', StationDisplayStaticView.as_view()),
     url(r'^station/(?P<pk>\d+)/dynamic/$', StationDisplayDynamicView.as_view()),
+    url(r'^stop/(?P<stop_id>\d+)/addpeople/$', main.views.add_view),
 ]

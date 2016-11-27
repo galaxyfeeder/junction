@@ -1,7 +1,8 @@
+from django.http import JsonResponse
 from rest_framework import viewsets
 from django.views.generic import DetailView
 
-from main.models import Line, Station, Bus
+from main.models import Line, Station, Bus, Stop
 from main.serializers import BusSerializer, StationSerializer, LineSerializer
 
 
@@ -32,3 +33,13 @@ class StationDisplayStaticView(DetailView):
 class StationDisplayDynamicView(DetailView):
     model = Station
     template_name = 'main/station_display_dynamic.html'
+
+
+def add_view(request, stop_id):
+
+    stop = Stop.objects.get(pk=stop_id)
+
+    stop.people_waiting += 1
+    stop.save()
+
+    return JsonResponse({'success': True})
