@@ -20,7 +20,7 @@ from django.views.generic import RedirectView
 from main.views import LineDetailView, StationDisplayDynamicView, StationDisplayStaticView
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(url='/api')),
+    url(r'^$', RedirectView.as_view(url='/demo/index.html')),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include('main.api')),
