@@ -6,8 +6,160 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/linemap.css">
     <link rel="stylesheet" href="/static/css/extra.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
 </head>
 <body>
 
+    <div class="background-image">
+        <div class="layer"></div>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-xs-10">
+                <h1>HELSINKI <small>{{ station.name }}</small></h1>
+                <img id="logo" src="/static/img/logo.png" height="50">
+            </div>
+        </div>
+        <div class="hr"></div>
+        <div class="row">
+        <h2>NEXT BUSES</h2>
+            {% for stop in station.stop_set.all %}
+                <div class="col-xs-6">
+                    <div class="row bus-time-entry">
+                        <div class="col-xs-2">
+                            <div class="line-number-container">
+                                <span class="line-number">{{ stop.line.number }}</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-10" style="margin-top: 5px;">
+                            <div class="col-xs-8">
+                                <span class="destination">{{ stop.line.stops.last.station.name }}</span>
+                            </div>
+                            <div class="col-xs-4 align-right">
+                                <span class="time-left">{{ forloop.counter }} min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        <div class="col-xs-6">
+                    <div class="row bus-time-entry">
+                        <div class="col-xs-2">
+                            <div class="line-number-container">
+                                <span class="line-number">196</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-10" style="margin-top: 5px;">
+                            <div class="col-xs-8">
+                                <span class="destination">Fredrikinkatu</span>
+                            </div>
+                            <div class="col-xs-4 align-right">
+                                <span class="time-left">2 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <div class="col-xs-6">
+                    <div class="row bus-time-entry">
+                        <div class="col-xs-2">
+                            <div class="line-number-container">
+                                <span class="line-number">196</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-10" style="margin-top: 5px;">
+                            <div class="col-xs-8">
+                                <span class="destination">Fredrikinkatu</span>
+                            </div>
+                            <div class="col-xs-4 align-right">
+                                <span class="time-left">2 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <div class="col-xs-6">
+                    <div class="row bus-time-entry">
+                        <div class="col-xs-2">
+                            <div class="line-number-container">
+                                <span class="line-number">196</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-10" style="margin-top: 5px;">
+                            <div class="col-xs-8">
+                                <span class="destination">Fredrikinkatu</span>
+                            </div>
+                            <div class="col-xs-4 align-right">
+                                <span class="time-left">2 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <div class="col-xs-6">
+                    <div class="row bus-time-entry">
+                        <div class="col-xs-2">
+                            <div class="line-number-container">
+                                <span class="line-number">196</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-10" style="margin-top: 5px;">
+                            <div class="col-xs-8">
+                                <span class="destination">Fredrikinkatu</span>
+                            </div>
+                            <div class="col-xs-4 align-right">
+                                <span class="time-left">2 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <img class="divider" src="/static/img/divider.svg">
+        <div class="row">
+            <h2>REQUEST BUS STOP</h2>
+            <br>
+            <div style="margin: auto">
+                {% for stop in station.stop_set.all %}
+                    <div class="col-xs-3">
+                        <div class="line-number-container map-button" id="button-line-{{ stop.line.pk }}">
+                            <span class="line-number-button">{{ stop.line.number }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% for stop in station.stop_set.all %}
+            <div class="map-wrapper full-size" id="line-{{ stop.line.pk }}" style="display: none;">
+
+                <div class="line white horizontal-bottom full-line" style="width: 100%">
+                    <div class="line red horizontal-bottom line-progress"></div>
+                    {% for station_l in stop.line.stops.all %}
+
+                    <span class="station {% if forloop.last or forloop.first %}premium{% elif station_l.station == station %}current active{% elif station_l.passenger_count == 0 %}host{% endif %}" id="test" style="left: calc(({{ forloop.counter0 }} * (100% / ({{ stop.line.stops.count }} - 1))) - 7px)">
+                    <span class="label station-label left-label"><i class="count">X min</i></i>{{ station_l.station.name }}</span>
+                    </span>
+                            {% if station_l.station == station %}
+                        <span class="current-marker" style="left: calc(({{ forloop.counter0 }} * (100% / ({{ stop.line.stops.count }} - 1))) - 14px)"></span>
+                            {% endif %}
+
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+    $("")
+
+    $(".map-button").click(function (event) {
+
+        line = this.id.split("-")[2];
+        console.log(line);
+        console.log("#line-"+line);
+        $(".full-size").hide();
+        $(".map-button").removeClass("active");
+        $(this).addClass("active");
+        $("#line-"+line).show();
+    })
+
+</script>
+<!--<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUhVDH00C242tqOr9-NI2jIyQEqcl4ZWo&callback=initMap"></script>-->
 </body>
 </html>
