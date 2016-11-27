@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.generic import RedirectView
+
 from main.views import LineDetailView, StationDisplayDynamicView, StationDisplayStaticView
 
 urlpatterns = [
+    url(r'^$', RedirectView.as_view(url='/api')),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include('main.api')),
