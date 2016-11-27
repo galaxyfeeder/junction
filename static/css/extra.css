@@ -9,6 +9,12 @@ h1 {
     font-size: 3em;
     letter-spacing: 10px;
 }
+
+h2 {
+    margin: 9px 20px 0;
+    font-size: 2em;
+}
+
 small {
     margin: 0;
     letter-spacing: normal;
@@ -34,13 +40,22 @@ hr {
     height: calc((100% - 90px) / 2);
 }
 
-.row.bus-entry {
+.bus-entry {
     margin: 30px 5px;
     font-size: large;
 }
 
-#map-wrapper {
+.bus-time-entry {
+    margin: 20px 5px;
+    font-size: large;
+}
+
+.map-wrapper {
     padding: 32px 0 0;
+}
+
+.map-wrapper.full-size {
+    padding: 100px;
 }
 
 #map {
@@ -48,12 +63,22 @@ hr {
 }
 
 .busses-1 {
-    height: calc(100vh - (147px * 1) - 185px);
+    height: calc(100vh - (117px * 1) - 264px);
     margin: 20px;
 }
 
 .busses-2 {
-    height: calc(100vh - (117px * 2) - 215px);
+    height: calc(100vh - (117px * 2) - 264px);
+    margin: 20px;
+}
+
+.busses-3 {
+    height: calc(100vh - (117px * 3) - 264px);
+    margin: 20px;
+}
+
+.busses-4 {
+    height: calc(100vh - (117px * 4) - 264px);
     margin: 20px;
 }
 
@@ -63,16 +88,42 @@ hr {
     text-align: center;
 }
 
-span.line-number {
+.line-number-container:hover {
+    background-color: white;
+    color: black;
+}
+
+.line-number-container.active {
+    background-color: white;
+    color: black;
+}
+
+span.line-number-button {
+    font-size: 6em;
+}
+
+.bus-entry span.line-number {
     font-size: 3em;
 }
 
-span.destination {
+.bus-entry span.destination {
     font-size: xx-large;
 }
 
-span.time-left {
+.bus-entry span.time-left {
     font-size: xx-large;
+}
+
+.bus-time-entry span.line-number {
+    font-size: x-large;
+}
+
+.bus-time-entry span.destination {
+    font-size: x-large;
+}
+
+.bus-time-entry span.time-left {
+    font-size: x-large;
 }
 
 .align-right {

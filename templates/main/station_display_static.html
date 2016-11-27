@@ -22,6 +22,7 @@
         </div>
         <div class="hr"></div>
         <div class="row">
+            <h2>NEXT BUSES STOPING HERE</h2>
             {% for stop in station.stop_set.all %}
             <div class="row bus-entry">
                 <div class="col-xs-2">
@@ -34,16 +35,16 @@
                         <span class="destination">{{ stop.line.stops.last.station.name }}</span>
                     </div>
                     <div class="col-xs-3 align-right">
-                        <span class="time-left">2 min</span>
+                        <span class="time-left">{{ forloop.counter }} min</span>
                     </div>
                     <div class="col-xs-12">
-                        <div id="map-wrapper">
+                        <div class="map-wrapper">
 
                             <div class="line white horizontal-bottom full-line" style="width: 100%">
-                            <!--<span class="bus" id="test" style="left: 75px"></span>-->
+                                <div class="line red horizontal-bottom line-progress"></div>
                                 {% for station_l in stop.line.stops.all %}
 
-                                <span class="station {% if forloop.last or forloop.first %}premium{% elif station_l.station == station %}current{% elif forloop.counter == 3 %}host{% endif %}" id="test" style="left: calc(({{ forloop.counter0 }} * (100% / ({{ stop.line.stops.count }} - 1))) - 7px)">
+                                <span class="station {% if forloop.last or forloop.first %}premium{% elif station_l.station == station %}current{% elif stop.will_stop %}host{% endif %}" id="test" style="left: calc(({{ forloop.counter0 }} * (100% / ({{ stop.line.stops.count }} - 1))) - 7px)">
                                 </span>
                                         {% if station_l.station == station %}
                                     <span class="current-marker" style="left: calc(({{ forloop.counter0 }} * (100% / ({{ stop.line.stops.count }} - 1))) - 14px)"></span>
